@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ark GameUserSettings.ini Generator</title>
+    <link rel="stylesheet" href="./CSS/Style.css">
+</head>
+<body>
+    <div class="settingsContainer">
+        <h1>Ark GameUserSettings.ini Generator</h1>
+        <h4>This is only for Ark Survival Ascended</h4>
+        <form id="ark-settings-form">
+            <div class="center uploadFile">
+                <label for="gameUsersettingsFileInput">Choose a file:</label><br>
+                <input type="file" accept=".ini" id="gameUsersettingsFileInput"><br><br>
+            </div>
+            <div class="center pings">
+                <label>
+                    <input type="checkbox" name="resourcePings" value="resourcePings">
+                    Resource Pings
+                </label>
+            </div>
+            <div id="center pings">
+                <label>
+                    <input type="checkbox" name="cavePings" value="cavePings">
+                    Cave Pings
+                </label>
+            </div>
+            <div id="center pings">
+                <label>
+                    <input type="checkbox" name="notePings" value="notePings">
+                    Note Pings
+                </label>
+            </div>
+            
+            <div id="center settings">
+                Auto Brightness
+                <p class="component-title"></p>
+                <div class="autoBrightnessContainer">
+                    <input type="checkbox" name="autoBrightness" value="autoBrightness" class="BrightnessCheckbox" id="BrightnessCheckbox">
+                    <label class="switch" for="BrightnessCheckbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <button type="submit">Generate INI</button>
+        </form>
+        <footer align="center">
+            © 2023 All rights Reserved.
+        </footer>
+    </div>
+    <script src="./JS/index.js"></script>
+</body>
+
+</html>

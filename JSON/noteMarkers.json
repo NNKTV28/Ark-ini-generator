@@ -1,0 +1,144 @@
+{
+  "SavedMinimapMarks": [
+    {
+      "Name": " HLN-A Discovery #1",
+      "CustomTag": "Waypoint0",
+      "Location": {
+        "X": 287244.3,
+        "Y": 149851.5,
+        "Z": -24596.77
+      },
+      "Color": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "ID": 0,
+      "MarkIcon": "/Script/Engine.Texture2D'/Game/PrimalEarth/UI/Textures/T_UI_HUDPointOfInterest_Special.T_UI_HUDPointOfInterest_Special'",
+      "MapName": "TheIsland_WP",
+      "bIsShowing": false,
+      "IconColor": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "bIsShowingText": false,
+      "CharacterID": -1,
+      "CharacterIsPlayer": false
+    },
+    {
+      "Name": " HLN-A Discovery #2",
+      "CustomTag": "Waypoint1",
+      "Location": {
+        "X": 74121.46,
+        "Y": 163122,
+        "Z": -25037.66
+      },
+      "Color": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "ID": 0,
+      "MarkIcon": "/Script/Engine.Texture2D'/Game/PrimalEarth/UI/Textures/T_UI_HUDPointOfInterest_Special.T_UI_HUDPointOfInterest_Special'",
+      "MapName": "TheIsland_WP",
+      "bIsShowing": false,
+      "IconColor": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "bIsShowingText": false,
+      "CharacterID": -1,
+      "CharacterIsPlayer": false
+    },
+    {
+      "Name": " HLN-A Discovery #3",
+      "CustomTag": "Waypoint2",
+      "Location": {
+        "X": -178655.3,
+        "Y": -176172.4,
+        "Z": -6013.25
+      },
+      "Color": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "ID": 0,
+      "MarkIcon": "/Script/Engine.Texture2D'/Game/PrimalEarth/UI/Textures/T_UI_HUDPointOfInterest_Special.T_UI_HUDPointOfInterest_Special'",
+      "MapName": "TheIsland_WP",
+      "bIsShowing": false,
+      "IconColor": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "bIsShowingText": false,
+      "CharacterID": -1,
+      "CharacterIsPlayer": false
+    },
+    {
+      "Name": " Helena Achatina",
+      "CustomTag": "Waypoint3",
+      "Location": {
+        "X": 225575,
+        "Y": 206487,
+        "Z": -11169
+      },
+      "Color": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "ID": 0,
+      "MarkIcon": "/Script/Engine.Texture2D'/Game/PrimalEarth/UI/Textures/T_UI_HUDPointOfInterest_Special.T_UI_HUDPointOfInterest_Special'",
+      "MapName": "TheIsland_WP",
+      "bIsShowing": false,
+      "IconColor": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "bIsShowingText": false,
+      "CharacterID": -1,
+      "CharacterIsPlayer": false
+    },
+    {
+      "Name": " Helena Allosaurus",
+      "CustomTag": "Waypoint4",
+      "Location": {
+        "X": -312863,
+        "Y": -268548,
+        "Z": -35339
+      },
+      "Color": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "ID": 0,
+      "MarkIcon": "/Script/Engine.Texture2D'/Game/PrimalEarth/UI/Textures/T_UI_HUDPointOfInterest_Special.T_UI_HUDPointOfInterest_Special'",
+      "MapName": "TheIsland_WP",
+      "bIsShowing": false,
+      "IconColor": {
+        "R": 1.0,
+        "G": 1.0,
+        "B": 1.0,
+        "A": 1.0
+      },
+      "bIsShowingText": false,
+      "CharacterID": -1,
+      "CharacterIsPlayer": false
+    }
+  ]
+}
