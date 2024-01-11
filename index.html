@@ -74,60 +74,110 @@
     </header>
     
     <div class="main-wrapper">
-        <iframe src="./includes/sidebar.html" class="sidebar-iframe" frameborder="0"></iframe>
+        
+        <div class="sidebar-div">
+            <ul class="sidebar-ul">
+                <li class="sidebar-li"><input type="text" placeholder="Search setting"></li>
+                <li class="sidebar-li">
+                    <button id="modifyIniButton" class="sidebar-button" onclick="showSection('modifyIniSection', this)">Modify .ini</button>
+                </li>
+                <li class="sidebar-li">
+                    <button id="modifySettingsButton" class="sidebar-button" onclick="showSection('modifySettingsSection', this)">Modify settings</button>
+                </li>
+                <li class="sidebar-li">
+                    <button id="mapPingsButton" class="sidebar-button" onclick="showSection('mapPingsSection', this)">Map pings</button>
+                </li>
+                <li class="sidebar-li">
+                    <button id="pvpSettingsButton" class="sidebar-button" onclick="showSection('pvpSettingsSection', this)">PVP settings</button>
+                </li>
+                <li class="sidebar-li">
+                    <button id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">Visual settings</button>
+                </li>
+            </ul>
+        </div>
+        
         <div class="settingsContainer">
-            <form id="ark-settings-form">
-                <div class="center uploadFile">
-                    <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
-                    <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"><br><br>
-                </div>
-                <div class="settings-pings">
-                    <label>
-                        <input type="checkbox" name="resourcePings" value="resourcePings">
-                        Resource Pings
-                    </label>
-    
-                    <label>
-                        <input type="checkbox" name="cavePings" value="cavePings">
-                        Cave Pings
-                    </label>
-    
-                    <label>
-                        <input type="checkbox" name="notePings" value="notePings">
-                        Note Pings
-                    </label>
-                </div>            
-                <div id="settings-sliders">
-                    
-                    Auto Brightness
-                    <p class="component-title"></p>
-                    <div class="toggle-switch-container">
-                        <input type="checkbox" name="autoBrightness" value="autoBrightness" class="toggleSwitch" id="brightnessSwitch">
-                        <label class="settings-switch" for="brightnessSwitch">
-                            <span class="settings-slider"></span>
+            <div id="modifyIniSection" class="modify-ini-section">
+                <form id="modify-ini-form">
+
+                </form>
+            </div>
+
+            <div id="modifySettingsSection" class="modify-settings-section">
+                <form id="modify-settings-form">
+
+                </form>
+            </div>
+
+            <div id="mapPingsSection" class="map-pings-section">
+                <form id="map-pings-form">
+                    <div class="center uploadFile">
+                        <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
+                        <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"><br><br>
+                    </div>
+                    <div class="settings-pings">
+                        <label class="settings-label">
+                            <input type="checkbox" name="resourcePings" value="resourcePings">
+                            Resource Pings
+                        </label>
+        
+                        <label class="settings-label">
+                            <input type="checkbox" name="cavePings" value="cavePings">
+                            Cave Pings
+                        </label>
+        
+                        <label class="settings-label">
+                            <input type="checkbox" name="notePings" value="notePings">
+                            Note Pings
                         </label>
                     </div>
-    
-                    Draw Grass
-                    <p class="component-title"></p>
-                    <div class="toggle-switch-container">
-                        <input type="checkbox" name="drawGrass" value="drawGrass" class="toggleSwitch" id="grassSwitch">
-                        <label class="settings-switch" for="grassSwitch">
-                            <span class="settings-slider"></span>
-                        </label>
+                    <button type="submit" class="generate-ini-button">Generate INI</button>
+                </form>
+            </div>
+
+            <div id="pvpSettingsSection" class="pvp-settings-section">
+                <form id="pvp-settings-form">
+
+                </form>
+            </div>
+
+            <div id="visualSettingsSection" class="visual-settings-section">
+                <form id="visual-settings-form">
+                    <div class="center uploadFile">
+                        <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
+                        <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"><br><br>
                     </div>
-    
-                    Show trees
-                    <p class="component-title"></p>
-                    <div class="toggle-switch-container">
-                        <input type="checkbox" name="showTrees" value="showTrees" class="toggleSwitch" id="treesSwitch">
-                        <label class="settings-switch" for="treesSwitch">
-                            <span class="settings-slider"></span>
-                        </label>
+                    <div id="settings-sliders">
+                        Auto Brightness
+                        <p class="component-title"></p>
+                        <div class="toggle-switch-container">
+                            <input type="checkbox" name="autoBrightness" value="autoBrightness" class="toggleSwitch" id="brightnessSwitch">
+                            <label class="settings-switch" for="brightnessSwitch">
+                                <span class="settings-slider"></span>
+                            </label>
+                        </div>
+        
+                        Draw Grass
+                        <p class="component-title"></p>
+                        <div class="toggle-switch-container">
+                            <input type="checkbox" name="drawGrass" value="drawGrass" class="toggleSwitch" id="grassSwitch">
+                            <label class="settings-switch" for="grassSwitch">
+                                <span class="settings-slider"></span>
+                            </label>
+                        </div>
+        
+                        Show trees
+                        <p class="component-title"></p>
+                        <div class="toggle-switch-container">
+                            <input type="checkbox" name="showTrees" value="showTrees" class="toggleSwitch" id="treesSwitch">
+                            <label class="settings-switch" for="treesSwitch">
+                                <span class="settings-slider"></span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="generate-ini-button">Generate INI</button>
-            </form>
+                    <button type="submit" class="generate-ini-button">Generate INI</button>
+                </form>
+            </div>
         </div>
     </div>
     <script src="./JS/index.js"></script>

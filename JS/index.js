@@ -103,8 +103,7 @@ form.addEventListener("submit", async (event) => {
   }, 100);
 });
 
-// create a function that when the theme switch is interacted the body class will change to darkmode and when checked again to ligtmode
-
+// Add event listener for the theme toggle button
 const themeSwitch = document.getElementById("theme-toggle-button");
 themeSwitch.addEventListener("change", () => {
   if(themeSwitch.checked === true)
@@ -115,8 +114,41 @@ themeSwitch.addEventListener("change", () => {
   }
   
 });
+
+// Display the selected file name in the custom file label
 function displayFileName() {
   var input = document.getElementById('gameUsersettingsFileInput');
   var fileName = input.value.split('\\').pop(); // Get only the file name, not the full path
   document.getElementById('customFileLabel').innerText = 'Selected file: ' + fileName;
+}
+
+// Show only the selected section
+function showSection(sectionId, buttonId) {
+  // Hide all sections
+  const sections = ['modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
+  sections.forEach(section => {
+      document.getElementById(section).style.display = 'none';
+  });
+
+  // Remove 'selected' class from all buttons
+  const buttons = document.querySelectorAll('.sidebar-button');
+  buttons.forEach(btn => {
+      btn.classList.remove('selected');
+  });
+
+  // Show the selected section
+  document.getElementById(sectionId).style.display = 'block';
+
+  // get label id for the selected button
+  
+
+  // Add 'selected' class to the clicked button
+  if(buttonId == null){
+    alert("Button id is null")
+  }else
+  {
+    console.log(buttonId.id);
+    document.getElementById(buttonId.id).classList.add('selected');
+  }
+  
 }
