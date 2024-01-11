@@ -1,16 +1,39 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
+/* MAIN PAGE LAYOUT*/
+.header-div {
+  background-color: #83cbd8;
+}
+.main-wrapper {
+  display: flex;
+}
+.sidebar-iframe {
+  width: fit-content;
+  height: 100vh;
+  border: none;
+}
 .settingsContainer {
-  max-width: 1200px;
+  flex-grow: 1;
+}
+/* END MAIN PAGE LAYOUT*/
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* DARKMODE THEME*/
+.darkmode {
+  background-color: gray;
+}
+
+/* SETTINGS CONTAINER*/
+.settingsContainer {
   margin: 0 auto;
   padding: 20px;
-  background-color: grey;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
 }
 
 h1, h4{
@@ -18,7 +41,7 @@ h1, h4{
   margin-bottom: 20px;
 }
 h4{
-  color: yellow;
+  color: red;
 }
 
 label {
@@ -30,35 +53,36 @@ input[type="checkbox"] {
   margin-right: 10px;
 }
 
-button {
+.generate-ini-button {
   display: block;
-  width: 100%;
+  width: 300px;
   padding: 10px;
   margin-top: 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
+  border-radius: 20px;
 }
 
-button:hover {
+.generate-ini-button:hover {
   background-color: #0056b3;
 }
 
-.autoBrightnessContainer {
+.toggle-switch-container {
   width: 51px;
   height: 31px;
   position: relative;
 }
 
-.BrightnessCheckbox {
+.toggleSwitch {
   opacity: 0;
   width: 0;
   height: 0;
   position: absolute;
 }
 
-.switch {
+.settings-switch {
   width: 100%;
   height: 100%;
   display: block;
@@ -69,7 +93,7 @@ button:hover {
 }
 
 /* The slider */
-.slider {
+.settings-slider {
   width: 27px;
   height: 27px;
   position: absolute;
@@ -82,11 +106,11 @@ button:hover {
   cursor: pointer;
 }
 
-.BrightnessCheckbox:checked + .switch {
+.toggleSwitch:checked + .settings-switch {
   background-color: #34c759;
 }
 
-.BrightnessCheckbox:checked + .switch .slider {
+.toggleSwitch:checked + .settings-switch .settings-slider {
   left: calc(50% - 27px / 2 + 10px);
   top: calc(50% - 27px / 2);
 }
@@ -94,4 +118,98 @@ button:hover {
   text-align: center;
   font-size: 12px;
   border-top: 20px;
+}
+
+/* START OF THE THEME CHANGE SLIDER */
+
+.theme-switch {
+  height: 100px;
+  width: 200px;
+}
+
+/* The switch - the box around the slider */
+#theme-toggle-button {
+  font-size: 17px;
+  position: relative;
+  display: inline-block;
+  width: 7em;
+  cursor: pointer;
+}
+
+/* Hide default HTML checkbox */
+#toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#container,
+#patches,
+#stars,
+#button,
+#sun,
+#moon,
+#cloud {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.25s;
+}
+
+/* night sky background */
+#toggle:checked + svg #container {
+  fill: #2b4360;
+}
+
+/* move button to right when checked */
+#toggle:checked + svg #button {
+  transform: translate(28px, 2.333px);
+}
+
+/* show/hide sun and moon based on checkbox state */
+#sun {
+  opacity: 1;
+}
+
+#toggle:checked + svg #sun {
+  opacity: 0;
+}
+
+#moon {
+  opacity: 0;
+}
+
+#toggle:checked + svg #moon {
+  opacity: 1;
+}
+
+/* show or hide background items on checkbox state */
+#cloud {
+  opacity: 1;
+}
+
+#toggle:checked + svg #cloud {
+  opacity: 0;
+}
+
+#stars {
+  opacity: 0;
+}
+
+#toggle:checked + svg #stars {
+  opacity: 1;
+}
+
+/* END OF THE THEME CHANGE SLIDER */
+
+.file-upload-label {
+  max-width: fit-content;
+  background: #007bff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 9px;
+  color: white;
+}
+
+.custom-file-input {
+  display:none;
 }
