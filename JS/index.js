@@ -44,26 +44,7 @@ const improvePVPCommand =
 `grass.Enable 0 | r.Water.SingleLayer.Reflection 0 | r.LightShaftQuality 0 | r.VolumetricCloud 0 | r.VolumetricFog 0 | r.BloomQuality 0 | r.Lumen.Reflections.Allow 0 | r.Lumen.DiffuseIndirect.Allow 0 | r.Shadow.Virtual.Enable 0 | r.Shadow.CSM.MaxCascades 0 | sg.FoliageQuality 0 | sg.TextureQuality 0 | wp.Runtime.HLOD 0 | r.MipMapLODBias 1 | r.DistanceFieldShadowing 0 | r.Streaming.PoolSize 1 | r.Nanite.MaxPixelsPerEdge 4 | r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution 16 | r.PostProcessing.DisableMaterials 1 | r.ContactShadows 0 | r.depthoffieldquality 0 | r.depthoffieldquality 0 | r.fog 0 | r.lightshafts 0 | r.LightCulling.Quality 0 | foliage.LODDistanceScale 0 | r.shadowquality 0 | r.DynamicGlobalIlluminationMethod 0 | r.SkylightIntensityMultiplier 5 | r.Shading.FurnaceTest.SampleCount 0 | r.ScreenPercentage 50 | r.detailmode 0 | r.viewdistance 0 | r.foliage.WPODisableMultiplier 1 | r.foliage.AutoBoundsWPODisableMax 1 | r.Shading.FurnaceTest 1 | r.Shading.EnergyConservation 0`
 */
 
-// Execute this code when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function () {
-  // Show the first section by default
-  showSection("informationSection", document.getElementById("informationSection"));
-
-  // Optionally, you can also trigger the click event on the first button
-  // to apply any associated styles or functionality
-  document.getElementById("informationSection").click();
-});
-
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const checkedItems = [...form.elements].filter((item) => item.checked);
-
-  if (checkedItems.length === 0) {
-    alert("Please select at least one option.");
-    return;
-  }
-
+function generateIniFile() {
   // check if user uploaded a file named GameUserSettings.ini
   let gameUserSettingsField = document.getElementById(
     "gameUsersettingsFileInput"
@@ -72,7 +53,7 @@ form.addEventListener("submit", async (event) => {
     gameUserSettingsIni = defaultGameUserSettings;
     uploadedFile = false;
   } else {
-    gameUserSettingsIni = await gameUserSettingsField.files[0].text();
+    gameUserSettingsIni = gameUserSettingsField.files[0].text();
     uploadedFile = true;
 
     // TODO: check if the uploaded file is a valid gameUserSettingsIni file
@@ -81,7 +62,6 @@ form.addEventListener("submit", async (event) => {
     // If yes, then continue with the rest of the code
     // Check if the file contains the [DISPLAY] section
     if (!gameUserSettingsIni.includes("[DISPLAY]")) {
-      
       return;
     }
     // Check if the file contains the [Engine.RenderingSettings] section
@@ -96,11 +76,6 @@ form.addEventListener("submit", async (event) => {
     if (!gameUserSettingsIni.includes("[GENERAL]")) {
       return;
     }
-
-
-    // TODO: check if the uploaded file has any of the items already implemented and if it does then check the respective checkbox automatically
-    // Loop through checkedItems and see if any settings match the uploaded file
-
     // check if the file is empty
     if (gameUserSettingsIni.trim() === "") {
       gameUserSettingsIni = defaultGameUserSettings;
@@ -108,153 +83,80 @@ form.addEventListener("submit", async (event) => {
     }
   }
 
-  for (const item of checkedItems) {
-    // Update the gameUserSettingsIni based on the selected options
-    // TODO: Check if the checked items are under the needed indexes
-
-    // this must be under displayIndex line
-    if (item.name === "autoBrightness") {
-      if (gameUserSettingsIni.includes(settings.autoBrightness)) {
-        gameUserSettingsIni = gameUserSettingsIni.replace(
-          `bUseAutoBrightness="true"`,
-          `bUseAutoBrightness="false"`
-        );
-      } else {
-        gameUserSettingsIni = gameUserSettingsIni.replace(
-          `bUseAutoBrightness="false"`,
-          `bUseAutoBrightness="true"`
-        );
-      }
-    }
-
-    // this must be under engineIndex line
-    if (item.name === "drawGrass") {
-      // Check if the gameUserSettingsIni contains "bDrawGrass" and if not then create it and give it its selected value
-      if (!gameUserSettingsIni.includes(settings.drawGrass)) {
-        // Add bDrawGrass setting
-      }
-
-      if (gameUserSettingsIni.includes(settings.drawGrass)) {
-        gameUserSettingsIni = gameUserSettingsIni.replace(
-          `bDrawGrass="true"`,
-          `bDrawGrass="false"`
-        );
-      } else {
-        gameUserSettingsIni = gameUserSettingsIni.replace(
-          `bDrawGrass="false"`,
-          `bDrawGrass="true"`
-        );
-      }
-    }
-
-    // this must be under engineIndex line
-    if (item.name === "showTrees") {
-      // Check if the line exists and if not then create it
-      if (!gameUserSettingsIni.includes(settings.showTrees)) {
-        // Add showTrees setting
-      }
-
-      if (gameUserSettingsIni.includes(settings.showTrees)) {
-        gameUserSettingsIni = gameUserSettingsIni.replace(
-          `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=5000`,
-          `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=0`
-        );
-      } else {
-        gameUserSettingsIni = gameUserSettingsIni.replace(
-          `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=0`,
-          `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=5000`
-        );
-      }
-    }
-
+  // Check if the user wants to enable auto brightness
+  if (brightnessSwitch[0].checked) {
     gameUserSettingsIni = gameUserSettingsIni.replace(
-      settings[item.name],
-      item.value
+      "bUseAutoBrightness=0",
+      "bUseAutoBrightness=1"
+    );
+  }else {
+    // Check if the user wants to disable auto brightness
+    gameUserSettingsIni = gameUserSettingsIni.replace(
+      "bUseAutoBrightness=1",
+      "bUseAutoBrightness=0"
     );
   }
-
-  // Rest of submit handler
-});
-
-
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  const checkedItems = [...form.elements].filter((item) => item.checked);
-  
-  if (checkedItems.length === 0) {
-    alert("Please select at least one option.");
-    return;
+  // Check if the user wants to enable grass
+  if (grassSwitch[0].checked) {
+    gameUserSettingsIni = gameUserSettingsIni.replace(
+      "bDrawGrass=0",
+      "bDrawGrass=1"
+    );
+  }else {
+    // Check if the user wants to disable grass
+    gameUserSettingsIni = gameUserSettingsIni.replace(
+      "bDrawGrass=1",
+      "bDrawGrass=0"
+    );
   }
-  // check if user uploaded a file named GameUserSettings.ini
-  let gameUserSettingsField = document.getElementById("gameUsersettingsFileInput");
-  if (gameUserSettingsField.files.length === 0) {
-    gameUserSettingsIni = defaultGameUserSettings;
-    uploadedFile = false;
+  // Check if the user wants to enable grass
+  if (grassSwitch[1].checked) {
+    gameUserSettingsIni = gameUserSettingsIni.replace(
+      "bDrawGrass=0",
+      "bDrawGrass=1"
+    );
   }else{
-    gameUserSettingsIni = await gameUserSettingsField.files[0].text();
-    uploadedFile = true;
-    // check if the file is empty
-    if (gameUserSettingsIni.trim() === "") {
-      gameUserSettingsIni = defaultGameUserSettings;
-      uploadedFile = false;
-    }
-    // TODO: check if the uploaded file is a valid gameUserSettingsIni file
-    // TODO: check if the uploaded file has any of the items already implemented and if it does then check the respective checkbox automatically
-  }  
-  
-  for (const item of checkedItems) 
-  {
-    // Update the gameUserSettingsIni based on the selected options
-    // TODO: Check if the checked items are under the needed indexes
-    // this must be under displayIndex line
-    if(item.name === "autoBrightness")
-    {
-      if(gameUserSettingsIni.includes(settings.autoBrightness))
-      {
-        gameUserSettingsIni = gameUserSettingsIni.replace(`bUseAutoBrightness="true"`, `bUseAutoBrightness="false"`)
-      }else{
-        gameUserSettingsIni = gameUserSettingsIni.replace(`bUseAutoBrightness="false"`, `bUseAutoBrightness="true"`)
-      }
-    }
-    // this must be under engineIndex line
-    if(item.name === "drawGrass")
-    {
-      // TODO: Check if the gameUserSettingsIni contains "bDrawGrass" and if not then create it and give it its selected value
-      if(gameUserSettingsIni.includes(settings.drawGrass))
-      {
-        gameUserSettingsIni = gameUserSettingsIni.replace(`bDrawGrass="true"`, `bDrawGrass="false"`)
-      }else{
-        gameUserSettingsIni = gameUserSettingsIni.replace(`bDrawGrass="false"`, `bDrawGrass="true"`)
-      }
-    }
-    // this must be under engineIndex line
-    if(item.name === "showTrees")
-    {
-      // TODO: Check if the line exists and if not then create it
-      if(gameUserSettingsIni.includes(settings.showTrees))
-      {
-        gameUserSettingsIni = gameUserSettingsIni.replace(`wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=5000`, `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=0`)
-      }else{
-        gameUserSettingsIni = gameUserSettingsIni.replace(`wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=0`, `wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range=5000`)
-      }
-    }
-    gameUserSettingsIni = gameUserSettingsIni.replace(settings[item.name], item.value);
+    gameUserSettingsIni = gameUserSettingsIni.replace(
+      "bDrawGrass=1",
+      "bDrawGrass=0"
+    );
   }
+  downloadFile();
+  // Rest of submit handler
+};
 
-  const blob = new Blob([gameUserSettingsIni], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.style.display = "none";
-  a.href = url;
-  a.download = "GameUserSettings.ini";
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }, 100);
-});
+
+// Download the generated file
+function downloadFile() {
+  try {
+    const fileBlob = new Blob([gameUserSettingsIni], { type: FILE_TYPE });
+    const url = URL.createObjectURL(fileBlob);
+    const anchorTag = document.createElement("a");
+    anchorTag.style.display = "none";
+    anchorTag.href = url;
+    anchorTag.download = FILENAME;
+    document.body.appendChild(anchorTag);
+    anchorTag.click();
+
+    if (checkIfDownloadSuccessful()) {
+      setTimeout(() => {
+        document.body.removeChild(anchorTag);
+        URL.revokeObjectURL(url);
+      }, 100);
+    }
+  } catch (error) {
+    console.error("Failed to download file", error);
+  }
+}
+
+function checkIfDownloadSuccessful() {
+  // Logic to check if file download succeeded
+  return true;
+}
+
+const FILE_TYPE = "text/plain";
+const FILENAME = "GameUserSettings.ini";
+;
 
 // Toggle darkmode
 function toggleTheme() {

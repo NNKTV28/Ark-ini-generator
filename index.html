@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ark GameUserSettings.ini Generator</title>
     <link rel="stylesheet" href="./CSS/Style.css" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   </head>
   <body>
     <header>
@@ -198,7 +199,7 @@
             </svg>
           </label>
         </div>
-        <h1>Ark GameUserSettings.ini Generator</h1>
+        <h1>GameUserSettings.ini Generator</h1>
         <h4>This is only for Ark Survival Ascended</h4>
       </div>
     </header>
@@ -207,11 +208,11 @@
       <div class="sidebar-div">
         <ul class="sidebar-ul">
           <li class="sidebar-li">
-            <input type="text" class="settings-searcher" placeholder="Search setting"/>
+            <input id="settings-searcher" type="text" class="settings-searcher" placeholder="Search setting"/>
             <button id="search-button"></button>
           </li>
           <li class="sidebar-li">
-            <button id="informationButton" class="sidebar-button" onclick="showSection('informationSection', this)">Information</button>
+            <button id="informationButton" class="sidebar-button selected" onclick="showSection('informationSection', this)">Information</button>
           </li>
           <li class="sidebar-li">
             <button id="modifyIniButton" class="sidebar-button" onclick="showSection('modifyIniSection', this)">Modify .ini</button>
@@ -239,12 +240,23 @@
 
       <div class="settingsContainer">
 
-        <div id="informationSection" class="information-section">
-            
+        <div id="informationSection" class="information-section" style="display: block;">
+            <p>This is a site to make your own GameUserSettings.ini file or to modify one that you upload</p>
           </div>
 
-        <div id="modifyIniSection" class="modify-ini-section">
-          <form id="modify-ini-form">
+        <div id="modifyIniSection" class="modify-ini-section" style="display: none;">
+            <div class="center uploadFile">
+              <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
+              <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br /><br />
+            </div>
+
+            <button class="generate-ini-button" onclick="">
+              Generate INI
+            </button>
+        </div>
+
+        <div id="modifySettingsSection" class="modify-settings-section" style="display: none;">
+          
             <div class="center uploadFile">
               <label
                 for="gameUsersettingsFileInput"
@@ -261,37 +273,13 @@
               /><br /><br />
             </div>
 
-            <button type="submit" class="generate-ini-button">
+            <button type="submit" class="generate-ini-button" onclick="generateIniFile">
               Generate INI
             </button>
-          </form>
+          
         </div>
 
-        <div id="modifySettingsSection" class="modify-settings-section">
-          <form id="modify-settings-form">
-            <div class="center uploadFile">
-              <label
-                for="gameUsersettingsFileInput"
-                class="file-upload-label"
-                id="customFileLabel"
-                >Upload .ini</label
-              >
-              <input
-                type="file"
-                accept=".ini"
-                id="gameUsersettingsFileInput"
-                onchange="displayFileName()"
-                class="custom-file-input"
-              /><br /><br />
-            </div>
-
-            <button type="submit" class="generate-ini-button">
-              Generate INI
-            </button>
-          </form>
-        </div>
-
-        <div id="mapPingsSection" class="map-pings-section">
+        <div id="mapPingsSection" class="map-pings-section" style="display: none;">
           <form id="map-pings-form">
             <div class="center uploadFile">
               <label
@@ -308,13 +296,10 @@
                 class="custom-file-input"
               /><br /><br />
             </div>
-            <div class="settings-pings">
+
+            <div class="settings-pings" >
               <label class="settings-label">
-                <input
-                  type="checkbox"
-                  name="resourcePings"
-                  value="resourcePings"
-                />
+                <input type="checkbox" name="resourcePings" value="resourcePings"/>
                 Resource Pings
               </label>
 
@@ -334,22 +319,11 @@
           </form>
         </div>
 
-        <div id="pvpSettingsSection" class="pvp-settings-section">
+        <div id="pvpSettingsSection" class="pvp-settings-section" style="display: none;">
           <form id="pvp-settings-form">
             <div class="center uploadFile">
-              <label
-                for="gameUsersettingsFileInput"
-                class="file-upload-label"
-                id="customFileLabel"
-                >Upload .ini</label
-              >
-              <input
-                type="file"
-                accept=".ini"
-                id="gameUsersettingsFileInput"
-                onchange="displayFileName()"
-                class="custom-file-input"
-              /><br /><br />
+              <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
+              <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/>
             </div>
 
             <button type="submit" class="generate-ini-button">
@@ -358,22 +332,11 @@
           </form>
         </div>
 
-        <div id="visualSettingsSection" class="visual-settings-section">
+        <div id="visualSettingsSection" class="visual-settings-section" style="display: none;">
           <form id="visual-settings-form">
             <div class="center uploadFile">
-              <label
-                for="gameUsersettingsFileInput"
-                class="file-upload-label"
-                id="customFileLabel"
-                >Upload .ini</label
-              >
-              <input
-                type="file"
-                accept=".ini"
-                id="gameUsersettingsFileInput"
-                onchange="displayFileName()"
-                class="custom-file-input"
-              /><br /><br />
+              <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel" >Upload .ini</label>
+              <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br /><br />
             </div>
             <div id="settings-sliders">
               Auto Brightness

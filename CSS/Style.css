@@ -5,7 +5,7 @@
 
 /* MAIN PAGE LAYOUT*/
 .header-div {
-  background-color: #83cbd8;
+  background-color: lightblue;
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -84,7 +84,7 @@ body {
 
 /* DARKMODE THEME*/
 .darkmode {
-  background-color: gray;
+  background-color: darkgray;
 }
 
 h4{
@@ -254,6 +254,11 @@ input[type="checkbox"] {
   border: none;
   border-radius: 9px;
   color: white;
+}
+
+.file-upload-label::before {
+  content: url("https://api.iconify.design/line-md/cloud-upload-loop.svg");
+  padding-right: 10px;  
 }
 
 .custom-file-input {
