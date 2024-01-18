@@ -1,4 +1,14 @@
-const form = document.getElementById("ark-settings-form");
+const MINI_MAP_NOTES = "../PingLocations/MINI_MAP_NOTES.txt";
+
+const FILE_TYPE = "text/plain";
+const FILENAME = "GameUserSettings.ini";
+
+const iniFile = document.getElementById('gameUsersettingsFileInput');
+const sections = ['informationSection', 'modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
+const uploadFileButton = document.getElementById('uploadAndDownloadButtons');
+const downloadDileButton = document.getElementById('downloadButton');
+let renderedSection = "";
+
 let gameUserSettingsIni = "";
 let uploadedFile = false;
 const settings = {
@@ -7,6 +17,13 @@ const settings = {
   showTrees: "wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range"
 };
 
+const switchIDs = [
+  "brightnessSwitch",
+  "grassSwitch",
+  "treesSwitch",
+  "volumetricCloudsSwitch"
+];
+
 /**
  * Finds the index of the [DISPLAY] section header in the gameUserSettingsIni string.
  * This allows us to insert new display settings at the correct location later.
@@ -14,9 +31,6 @@ const settings = {
 const displayIndex = gameUserSettingsIni.indexOf("[DISPLAY]");
 const engineIndex = gameUserSettingsIni.indexOf("[Engine.RenderingSettings]");
 const scriptIndex = gameUserSettingsIni.indexOf("[Scripts/ShooterGame.ShooterGameUserSettings]");
-
-const brightnessSwitch = document.getElementsByName("autoBrightness");
-const grassSwitch = document.getElementsByName("drawGrass");
 
 const defaultGameUserSettings =
 "[GENERAL]\nRenderResX=1920\nRenderResY=1080\n" +
@@ -154,10 +168,6 @@ function checkIfDownloadSuccessful() {
   return true;
 }
 
-const FILE_TYPE = "text/plain";
-const FILENAME = "GameUserSettings.ini";
-;
-
 // Toggle darkmode
 function toggleTheme() {
   document.body.classList.toggle("darkmode");
@@ -166,18 +176,33 @@ function toggleTheme() {
 
 // Display the selected file name in the custom file label
 function displayFileName() {
-  var input = document.getElementById('gameUsersettingsFileInput');
-  var fileName = input.value.split('\\').pop(); // Get only the file name, not the full path
+  let fileName = iniFile.value.split('\\').pop(); // Get only the file name, not the full path
   document.getElementById('customFileLabel').innerText = 'Selected file: ' + fileName;
+  uploadedFile = true;
+  gameUserSettingsIni = iniFile.files[0].text();
+  loadFileAsText();
+}
+
+function loadFileAsText() {
+  let fileToLoad = document.getElementById("gameUsersettingsFileInput")
+    .files[0];
+
+  let fileReader = new FileReader();
+  fileReader.onload = function (fileLoadedEvent) {
+    let textFromFileLoaded = fileLoadedEvent.target.result;
+    document.getElementById("gameUsersettingsFileInput").value = textFromFileLoaded;
+  };
+  fileReader.readAsText(fileToLoad, "UTF-8");
+
+  console.log("File loaded\n" + fileReader.value);
 }
 
 // Show only the selected section
 function showSection(sectionId, buttonId) {
   // Hide all sections
-  const sections = ['informationSection', 'modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
   sections.forEach(section => {
       document.getElementById(section).style.display = 'none';
-  });
+  });  
 
   // Remove 'selected' class from all buttons
   const buttons = document.querySelectorAll('.sidebar-button');
@@ -186,7 +211,7 @@ function showSection(sectionId, buttonId) {
   });
 
   // Show the selected section
-  document.getElementById(sectionId).style.display = 'block';  
+  document.getElementById(sectionId).style.display = 'block';
 
   // Add 'selected' class to the clicked button
   if(buttonId == null){
@@ -194,6 +219,49 @@ function showSection(sectionId, buttonId) {
   }else
   {
     document.getElementById(buttonId.id).classList.add('selected');
-  }
-  
+    renderedSection = sectionId;
+    
+    if(renderedSection == 'informationSection'){
+      uploadFileButton.style.display = 'none';
+      downloadDileButton.style.display = 'none';
+    }else{
+      uploadFileButton.style.display = 'block';
+      downloadDileButton.style.display = 'block';
+    }
+  } 
 }
+
+function modifyIniSection(){
+}
+function modifySettingsSection(){
+}
+function mapPingsSection(){
+  let notePings = document.getElementById('notePings');
+  if(renderedSection == 'mapPingsSection'){
+    if(uploadedFile){
+      if (gameUserSettingsIni.contains("HLN-A Discovery"))
+      {
+        notePings.value = "checked";
+      }else{
+        // add the note pings content from MINI_MAP_NOTES.txt to the end of the uploaded iniFile
+        let notePingsContent = fetch(MINI_MAP_NOTES);
+        gameUserSettingsIni += notePingsContent;
+      }
+        
+    }
+  }
+}
+function pvpSettingsSection(){
+}
+function visualSettingsSection(){
+  if(renderedSection == 'visualSettingsSection'){
+    if(uploadedFile){
+      if (gameUserSettingsIni.contains("bUseAutoBrightness=true")){
+        brightnessSwitch[0].checked = true;
+        console.log(brightnessSwitch[0].checked);
+      }
+        
+    }
+  }
+}
+

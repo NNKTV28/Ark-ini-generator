@@ -239,64 +239,23 @@
       </div>
 
       <div class="settingsContainer">
+        <div class="uploadAndDownloadButtons" id="uploadAndDownloadButtons" style="display: none;">
+          <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
+          <input type="file" accept=".ini" value="" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br><br>
+        </div>
 
         <div id="informationSection" class="information-section" style="display: block;">
             <p>This is a site to make your own GameUserSettings.ini file or to modify one that you upload</p>
-          </div>
+        </div>
 
         <div id="modifyIniSection" class="modify-ini-section" style="display: none;">
-            <div class="center uploadFile">
-              <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
-              <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br /><br />
-            </div>
-
-            <button class="generate-ini-button" onclick="">
-              Generate INI
-            </button>
+            
         </div>
 
         <div id="modifySettingsSection" class="modify-settings-section" style="display: none;">
-          
-            <div class="center uploadFile">
-              <label
-                for="gameUsersettingsFileInput"
-                class="file-upload-label"
-                id="customFileLabel"
-                >Upload .ini</label
-              >
-              <input
-                type="file"
-                accept=".ini"
-                id="gameUsersettingsFileInput"
-                onchange="displayFileName()"
-                class="custom-file-input"
-              /><br /><br />
-            </div>
-
-            <button type="submit" class="generate-ini-button" onclick="generateIniFile">
-              Generate INI
-            </button>
-          
         </div>
 
         <div id="mapPingsSection" class="map-pings-section" style="display: none;">
-          <form id="map-pings-form">
-            <div class="center uploadFile">
-              <label
-                for="gameUsersettingsFileInput"
-                class="file-upload-label"
-                id="customFileLabel"
-                >Upload .ini</label
-              >
-              <input
-                type="file"
-                accept=".ini"
-                id="gameUsersettingsFileInput"
-                onchange="displayFileName()"
-                class="custom-file-input"
-              /><br /><br />
-            </div>
-
             <div class="settings-pings" >
               <label class="settings-label">
                 <input type="checkbox" name="resourcePings" value="resourcePings"/>
@@ -309,46 +268,22 @@
               </label>
 
               <label class="settings-label">
-                <input type="checkbox" name="notePings" value="notePings" />
+                <input type="checkbox" name="notePings" id="notePings" value="notePings" />
                 Note Pings
               </label>
             </div>
-            <button type="submit" class="generate-ini-button">
-              Generate INI
-            </button>
-          </form>
         </div>
 
         <div id="pvpSettingsSection" class="pvp-settings-section" style="display: none;">
-          <form id="pvp-settings-form">
-            <div class="center uploadFile">
-              <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
-              <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/>
-            </div>
-
-            <button type="submit" class="generate-ini-button">
-              Generate INI
-            </button>
-          </form>
+            
         </div>
 
         <div id="visualSettingsSection" class="visual-settings-section" style="display: none;">
-          <form id="visual-settings-form">
-            <div class="center uploadFile">
-              <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel" >Upload .ini</label>
-              <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br /><br />
-            </div>
             <div id="settings-sliders">
               Auto Brightness
               <p class="component-title"></p>
               <div class="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  name="autoBrightness"
-                  value="autoBrightness"
-                  class="toggleSwitch"
-                  id="brightnessSwitch"
-                />
+                <input type="checkbox" name="autoBrightness" class="toggleSwitch" id="brightnessSwitch"/>
                 <label class="settings-switch" for="brightnessSwitch">
                   <span class="settings-slider"></span>
                 </label>
@@ -357,13 +292,7 @@
               Draw Grass
               <p class="component-title"></p>
               <div class="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  name="drawGrass"
-                  value="drawGrass"
-                  class="toggleSwitch"
-                  id="grassSwitch"
-                />
+                <input type="checkbox" name="drawGrass" value="drawGrass" class="toggleSwitch" id="grassSwitch"/>
                 <label class="settings-switch" for="grassSwitch">
                   <span class="settings-slider"></span>
                 </label>
@@ -372,13 +301,7 @@
               Show trees
               <p class="component-title"></p>
               <div class="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  name="showTrees"
-                  value="showTrees"
-                  class="toggleSwitch"
-                  id="treesSwitch"
-                />
+                <input type="checkbox" name="showTrees" value="showTrees" class="toggleSwitch" id="treesSwitch"/>
                 <label class="settings-switch" for="treesSwitch">
                   <span class="settings-slider"></span>
                 </label>
@@ -387,13 +310,7 @@
               Volumetric clouds
               <p class="component-title"></p>
               <div class="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  name="toggleVolumetricClouds"
-                  value="toggleVolumetricClouds"
-                  class="toggleSwitch"
-                  id="volumetricCloudsSwitch"
-                />
+                <input type="checkbox" name="toggleVolumetricClouds" value="toggleVolumetricClouds" class="toggleSwitch" id="volumetricCloudsSwitch"/>
                 <label class="settings-switch" for="volumetricCloudsSwitch">
                   <span class="settings-slider"></span>
                 </label>
@@ -402,38 +319,21 @@
               Shadow quality
               <p class="component-title"></p>
               <div class="slider-container">
-                <input
-                  type="range"
-                  min="1"
-                  max="4"
-                  name="shadowQuality"
-                  value="shadowQuality"
-                  id="shadowQualitySlider"
-                />
+                <input type="range" min="1" max="4" name="shadowQuality" value="shadowQuality" id="shadowQualitySlider"/>
                 <output id="shadowQualitySlider" for="shadowQualitySlider"></output>
               </div>
 
               View distance
               <p class="component-title"></p>
               <div class="slider-container">
-                <input
-                  type="range"
-                  min="1"
-                  max="4"
-                  name="viewDistance"
-                  value="viewDistance"
-                  id="viewDistanceSlider"
-                />
+                <input type="range" min="1" max="4" name="viewDistance" value="viewDistance" id="viewDistanceSlider"/>
                 <output id="viewDistanceSlider" for="viewDistanceSlider"></output>
               </div>
             </div>
-            <button type="submit" class="generate-ini-button">
-              Generate INI
-            </button>
-          </form>
         </div>
-
-
+          <button id="downloadButton" class="generate-ini-button" onclick="downloadFile()" style="display: none;">
+            Generate INI
+          </button>
       </div>
     </div>
     <div class="main-footer">
@@ -443,12 +343,6 @@
                 <li><a href="https://discord.com/invite/RQ2NB2V9av">Discord Support server</a></li>
                 <li><a href="https://github.com/NNKTV28">Github</a></li>
             </ul>
-        </div>
-        <div class="">
-            
-        </div>
-        <div>
-            
         </div>
     </div>
     <script src="./JS/index.js"></script>
