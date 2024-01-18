@@ -7,6 +7,7 @@ const iniFile = document.getElementById('gameUsersettingsFileInput');
 const sections = ['informationSection', 'modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
 const uploadFileButton = document.getElementById('uploadAndDownloadButtons');
 const downloadDileButton = document.getElementById('downloadButton');
+let iniContent = document.getElementById("iniFilePreviewTextAreaId");
 let renderedSection = "";
 let defaultTheme = "light";
 let gameUserSettingsIni = "";
@@ -16,13 +17,6 @@ const settings = {
   drawGrass: "bDrawGrass",
   showTrees: "wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range"
 };
-
-const switchIDs = [
-  "brightnessSwitch",
-  "grassSwitch",
-  "treesSwitch",
-  "volumetricCloudsSwitch"
-];
 
 /**
  * Finds the index of the [DISPLAY] section header in the gameUserSettingsIni string.
@@ -37,26 +31,37 @@ const defaultGameUserSettings =
 "[GRAPHICS]\nDefaultWindowMode=2\nScreenPercentage=100\nMaxShadowDistance=5000\n" +
 "[LEVELOFDETAIL]\nResolutionQuality=1\nViewDistanceQuality=2\nShadow Quality=1\nAnti-Aliasing Quality=1\nEffects Quality=1\nTexture Quality=1\nPost Process Quality=1\nVisual Impairment=1\nMotion Blur=0\nAllow Facing Change On Next Character=0\nAlways Visible Shadows=1\nVolumetric Fog=0\nHBAO=0\nCascade Color Grading=0\nMotion Blur Gain=1.0\nBloomIntensity=1.0\nColor Grading Intensity=1.0\nSkin Color Correction=1\nTessellation Density=0.0\nDetail Texture Scale=1.0\nGlobal Occlusion Quality=0\nLensFlare Density=1.0\nWetness Intensity=1.0\nEye Adaptation Speed=0.0\nNear Visibility=1.0\nCinematic Anti-Aliasing Quality=1\nSharpening Intensity=1.0\nGhost Shadow Fadeout Distance=1000\nDark Light Layer Start Distance=500\nAuto-Exposure Min Bias=0.0\nAuto-Exposure Max Bias=0.0\nColor Scale Red=1.0\nColor Scale Green=1.0\nColor Scale Blue=1.0\nCinematic Dynamic Ambient Occlusion Radius=0.0\nCinematic Volumetric Fog Scattering Albedo=0.0\nCinematic Volumetric Fog Radius Scale=0.0\n"
 
-const slider = document.getElementById("viewDistanceSlider");
-const output = document.getElementById("viewDistanceSlider");
-output.innerHTML = slider.value;
 
-slider.oninput = function () {
-  if (this.value == "1") {
-    output.innerHTML = "Low";
-  } else if (this.value == "2") {
-    output.innerHTML = "Medium";
-  } else if (this.value == "3") {
-    output.innerHTML = "High";
+// View distance slider
+let viewDistanceSlider = document.getElementById("viewDistanceSlider");
+let viewDistanceSliderOutput = document.getElementById("viewDistanceSliderOutput");
+
+viewDistanceSlider.oninput = function() {
+  if (viewDistanceSlider.value >= 1 && viewDistanceSlider.value <= 25) {
+    viewDistanceSliderOutput.innerHTML = "Low";
+  } else if (viewDistanceSlider.value >= 26 && viewDistanceSlider.value <= 50) {
+    viewDistanceSliderOutput.innerHTML = "Medium";
+  } else if (viewDistanceSlider.value >= 51 && viewDistanceSlider.value <= 75) {
+    viewDistanceSliderOutput.innerHTML = "High";
   } else {
-    output.innerHTML = "Ultra";
+    viewDistanceSliderOutput.innerHTML = "Ultra";
   }
-};
+}
+// Shadow quality slider
+let shadowQualitySlider = document.getElementById("shadowQualitySlider");
+let shadowQualitySliderOutput = document.getElementById("shadowQualitySliderOutput");
 
-/*
-const improvePVPCommand = 
-`grass.Enable 0 | r.Water.SingleLayer.Reflection 0 | r.LightShaftQuality 0 | r.VolumetricCloud 0 | r.VolumetricFog 0 | r.BloomQuality 0 | r.Lumen.Reflections.Allow 0 | r.Lumen.DiffuseIndirect.Allow 0 | r.Shadow.Virtual.Enable 0 | r.Shadow.CSM.MaxCascades 0 | sg.FoliageQuality 0 | sg.TextureQuality 0 | wp.Runtime.HLOD 0 | r.MipMapLODBias 1 | r.DistanceFieldShadowing 0 | r.Streaming.PoolSize 1 | r.Nanite.MaxPixelsPerEdge 4 | r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution 16 | r.PostProcessing.DisableMaterials 1 | r.ContactShadows 0 | r.depthoffieldquality 0 | r.depthoffieldquality 0 | r.fog 0 | r.lightshafts 0 | r.LightCulling.Quality 0 | foliage.LODDistanceScale 0 | r.shadowquality 0 | r.DynamicGlobalIlluminationMethod 0 | r.SkylightIntensityMultiplier 5 | r.Shading.FurnaceTest.SampleCount 0 | r.ScreenPercentage 50 | r.detailmode 0 | r.viewdistance 0 | r.foliage.WPODisableMultiplier 1 | r.foliage.AutoBoundsWPODisableMax 1 | r.Shading.FurnaceTest 1 | r.Shading.EnergyConservation 0`
-*/
+shadowQualitySlider.oninput = function() {
+  if (shadowQualitySlider.value >= 1 && shadowQualitySlider.value <= 25) {
+    shadowQualitySliderOutput.innerHTML = "Low";
+  } else if (shadowQualitySlider.value >= 26 && shadowQualitySlider.value <= 50) {
+    shadowQualitySliderOutput.innerHTML = "Medium";
+  } else if (shadowQualitySlider.value >= 51 && shadowQualitySlider.value <= 75) {
+    shadowQualitySliderOutput.innerHTML = "High";
+  } else {
+    shadowQualitySliderOutput.innerHTML = "Ultra";
+  }
+}
 
 function generateIniFile() {
   // check if user uploaded a file named GameUserSettings.ini
@@ -139,7 +144,6 @@ function generateIniFile() {
   // Rest of submit handler
 };
 
-
 // Download the generated file
 function downloadFile() {
   try {
@@ -200,6 +204,7 @@ function displayFileName() {
 async function loadFileAsText() {
   let gameUserSettingsField = document.getElementById("gameUsersettingsFileInput");
   gameUserSettingsIni = await gameUserSettingsField.files[0].text();
+  showIniContent();
 }
 
 // Show only the selected section
@@ -226,7 +231,7 @@ function showSection(sectionId, buttonId) {
     document.getElementById(buttonId.id).classList.add('selected');
     renderedSection = sectionId;
     
-    if(renderedSection == 'informationSection'){
+    if(renderedSection == 'informationSection' || renderedSection == 'pvpSettingsSection'){
       uploadFileButton.style.display = 'none';
       downloadDileButton.style.display = 'none';
     }else{
@@ -261,6 +266,15 @@ function mapPingsSection(){
   }
 }
 function pvpSettingsSection(){
+  if(renderedSection == 'pvpSettingsSection'){
+    let initialCommand = "";
+    let checked = document.querySelectorAll(".pvpSettingsCommandCheckbox");
+    let command = document.querySelectorAll(".pvpSettingsCommand");
+    iniContent = initialCommand;
+
+    iniContent.value = gameUserSettingsIni;
+  }
+
 }
 function visualSettingsSection(){
   if(renderedSection == 'visualSettingsSection'){
@@ -269,8 +283,30 @@ function visualSettingsSection(){
         brightnessSwitch[0].checked = true;
         console.log(brightnessSwitch[0].checked);
       }
-        
     }
   }
 }
+function showIniContent(){
+  iniContent.value = gameUserSettingsIni;
+}
+function copyIniContent(){
+  iniContent.select();
+  document.execCommand("copy");
+}
 
+let mainWrapper = document.getElementById("main-wrapper");
+function openNav() {
+  document.getElementById("sidebar-div").style.width = "250px";
+  mainWrapper.style.marginLeft = "250px";
+  document.getElementById("closebtn").style.background = "url('https://api.iconify.design/line-md/menu-to-close-transition.svg') no-repeat center center / contain;";
+}
+function closeNav() {
+  document.getElementById("sidebar-div").style.width = "50px";
+  document.getElementById("sidebar-div").style.overflow = "hidden";
+  document.getElementById("closebtn").style.background = "url('https://api.iconify.design/line-md/close-to-menu-transition.svg') no-repeat center center / contain;";
+
+  document.querySelectorAll(".sidebar-button").style.width = "40px";
+  document.querySelectorAll(".sidebar-button").style.padding = "10px 5px";
+  document.querySelectorAll(".sidebar-button").style.textIndent = "-9999px";
+  mainWrapper.style.marginLeft= "50";
+}

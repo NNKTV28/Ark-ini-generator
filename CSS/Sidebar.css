@@ -1,0 +1,75 @@
+.sidebar-li {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+  }
+  .sidebar-div {
+    align-items: center;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100dvh;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color: grey;
+    box-sizing: inherit;
+  }
+  .settings-searcher {
+    padding: 5px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .sidebar-button {
+    width: 200px;
+    background: #007bff;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  .sidebar-button:hover {
+    background: #0055b1;
+    transition: ease-in-out .5s;
+  }
+  .selected {
+    background: #0f8000;
+  }
+  #search-button {
+    width: 50px;
+    height: 29px;
+    background: darkblue;
+    background: url('https://api.iconify.design/line-md/search-filled.svg') no-repeat center center / contain;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+   }
+
+
+.closebtn { 
+    width: 40px; 
+    height: 40px; 
+    background: url('https://api.iconify.design/line-md/menu-to-close-transition.svg') no-repeat center center / contain; 
+}
+
+.searchbar-and-close-sidebar{
+    display: flex;
+    align-items: center;
+}
+
+  /*
+  <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a id="informationButton" class="sidebar-button selected" onclick="showSection('informationSection', this)">Information</a>
+        <a id="modifyIniButton" class="sidebar-button" onclick="showSection('modifyIniSection', this)">Modify .ini</a>
+        <a id="modifySettingsButton" class="sidebar-button" onclick="showSection('modifySettingsSection', this)">Modify settings</a>
+        <a id="mapPingsButton" class="sidebar-button" onclick="showSection('mapPingsSection', this)">Map pings</a>
+        <a id="pvpSettingsButton" class="sidebar-button" onclick="showSection('pvpSettingsSection', this)">PVP settings</a>
+        <a id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">Visual settings</a>
+      </div>
+  */

@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ark GameUserSettings.ini Generator</title>
+    <link rel="stylesheet" href="./CSS/Footer.css" />
+    <link rel="stylesheet" href="./CSS/Header.css" />
+    <link rel="stylesheet" href="./CSS/InformationSection.css" />
+    <link rel="stylesheet" href="./CSS/ModifyIniSection.css" />
+    <link rel="stylesheet" href="./CSS/ModifySettingsSection.css" />
+    <link rel="stylesheet" href="./CSS/PvpSettingsSection.css" />
+    <link rel="stylesheet" href="./CSS/Sidebar.css" />
     <link rel="stylesheet" href="./CSS/Style.css" />
+    <link rel="stylesheet" href="./CSS/Themes.css" />
+    <link rel="stylesheet" href="./CSS/VisualSettingsSection.css" />
+    
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   </head>
   <body>
@@ -105,12 +115,12 @@
       </div>
     </header>
 
-    <div class="main-wrapper theme-light">
-      <div class="sidebar-div">
+    <div class="main-wrapper theme-light" id="main-wrapper">
+      <div class="sidebar-div" id="sidebar-div">
         <ul class="sidebar-ul">
-          <li class="sidebar-li">
+          <li class="sidebar-li searchbar-and-close-sidebar">
             <input id="settings-searcher" type="text" class="settings-searcher" placeholder="Search setting"/>
-            <button id="search-button"></button>
+            <button id="closebtn" class="closebtn" onclick="closeNav()"></button>
           </li>
           <li class="sidebar-li">
             <button id="informationButton" class="sidebar-button selected" onclick="showSection('informationSection', this)">Information</button>
@@ -122,22 +132,18 @@
             <button id="modifySettingsButton" class="sidebar-button" onclick="showSection('modifySettingsSection', this)">Modify settings</button>
           </li>
           <li class="sidebar-li">
-            <button id="mapPingsButton" class="sidebar-button" onclick="showSection('mapPingsSection', this)">
-              Map pings
-            </button>
+            <button id="mapPingsButton" class="sidebar-button" onclick="showSection('mapPingsSection', this)">Map pings</button>
           </li>
           <li class="sidebar-li">
-            <button id="pvpSettingsButton" class="sidebar-button" onclick="showSection('pvpSettingsSection', this)">
-              PVP settings
-            </button>
+            <button id="pvpSettingsButton" class="sidebar-button" onclick="showSection('pvpSettingsSection', this)">PVP settings</button>
           </li>
           <li class="sidebar-li">
-            <button id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">
-              Visual settings
-            </button>
+            <button id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">Visual settings</button>
           </li>
         </ul>
-      </div>
+    </div>
+      
+      
 
       <div class="settingsContainer theme-light">
         <div class="uploadAndDownloadButtons" id="uploadAndDownloadButtons" style="display: none;">
@@ -180,19 +186,64 @@
               </label>
 
               <label class="settings-label">
-                <input type="checkbox" name="cavePings" value="cavePings" />
+                <input type="checkbox" name="cavePings" value="cavePings"/>
                 Cave Pings
               </label>
 
               <label class="settings-label">
-                <input type="checkbox" name="notePings" id="notePings" value="notePings" />
+                <input type="checkbox" name="notePings" id="notePings" value="notePings"/>
                 Note Pings
               </label>
             </div>
         </div>
 
         <div id="pvpSettingsSection" class="pvp-settings-section" style="display: none;">
-            
+            Disable Grass
+            <p class="component-title"></p>
+            <div class="toggle-switch-container">
+              <input type="checkbox" name="disableGrass" class="pvpSettingsCommandCheckbox" id="pvpGrassSwitch"/>
+              <label class="pvp-switch" for="pvpGrassSwitch">
+                <span class="settings-slider"></span>
+              </label>
+            </div>
+
+            Disable trees
+            <p class="component-title"></p>
+            <div class="toggle-switch-container">
+              <input type="checkbox" name="drawGrass" value="" class="pvpSettingsCommandCheckbox" id="pvpTreesSwitch"/>
+              <label class="pvp-switch" for="pvpTreesSwitch">
+                <span class="settings-slider"></span>
+              </label>
+            </div>
+
+            Disable Fog
+            <p class="component-title"></p>
+            <div class="toggle-switch-container">
+              <input type="checkbox" name="showTrees" value="" class="pvpSettingsCommandCheckbox" id="pvpDisableFogSwitch"/>
+              <label class="pvp-switch" for="pvpDisableFogSwitch">
+                <span class="settings-slider"></span>
+              </label>
+            </div>
+
+            Disable volumetric clouds
+            <p class="component-title"></p>
+            <div class="toggle-switch-container">
+              <input type="checkbox" name="toggleVolumetricClouds" value="" class="pvpSettingsCommandCheckbox" id="pvpVolumetricCloudsSwitch"/>
+              <label class="pvp-switch" for="pvpVolumetricCloudsSwitch">
+                <span class="settings-slider"></span>
+              </label>
+            </div>
+
+            Disable  Lumen Reflections
+            <p class="component-title"></p>
+            <div class="toggle-switch-container">
+              <input type="checkbox" name="toggleVolumetricClouds" value="" class="pvpSettingsCommandCheckbox" id="pvpLumenReflections"/>
+              <label class="pvp-switch" for="pvpLumenReflections">
+                <span class="settings-slider"></span>
+              </label>
+            </div>
+
+             r.Water.SingleLayer.Reflection 0 | r.LightShaftQuality 0 | | r.Lumen.Reflections.Allow 0 | r.Lumen.DiffuseIndirect.Allow 0 | r.Shadow.Virtual.Enable 0 | r.Shadow.CSM.MaxCascades 0 | sg.FoliageQuality 0 | sg.TextureQuality 0 | wp.Runtime.HLOD 0 | r.MipMapLODBias 1 | r.DistanceFieldShadowing 0 | r.Streaming.PoolSize 1 | r.Nanite.MaxPixelsPerEdge 4 | r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution 16 | r.PostProcessing.DisableMaterials 1 | r.ContactShadows 0 | r.depthoffieldquality 0 | r.depthoffieldquality 0 | r.fog 0 | r.lightshafts 0 | r.LightCulling.Quality 0 | foliage.LODDistanceScale 0 | r.shadowquality 0 | r.DynamicGlobalIlluminationMethod 0 | r.SkylightIntensityMultiplier 5 | r.Shading.FurnaceTest.SampleCount 0 | r.ScreenPercentage 50 | r.detailmode 0 | r.viewdistance 0 | r.foliage.WPODisableMultiplier 1 | r.foliage.AutoBoundsWPODisableMax 1 | r.Shading.FurnaceTest 1 | r.Shading.EnergyConservation 0
         </div>
 
         <div id="visualSettingsSection" class="visual-settings-section" style="display: none;">
@@ -236,15 +287,15 @@
               Shadow quality
               <p class="component-title"></p>
               <div class="slider-container">
-                <input type="range" min="1" max="4" name="shadowQuality" value="shadowQuality" id="shadowQualitySlider"/>
-                <output id="shadowQualitySlider" for="shadowQualitySlider"></output>
+                <input type="range" min="1" max="100" name="shadowQuality" value="1" id="shadowQualitySlider" class="shadowQualitySlider"/>
+                <span id="shadowQualitySliderOutput">Low</span>
               </div>
 
               View distance
               <p class="component-title"></p>
               <div class="slider-container">
-                <input type="range" min="1" max="4" name="viewDistance" value="viewDistance" id="viewDistanceSlider"/>
-                <output id="viewDistanceSlider" for="viewDistanceSlider"></output>
+                <input type="range" min="1" max="100" name="viewDistance" value="1" id="viewDistanceSlider" class="viewDistanceSlider"/>
+                <span id="viewDistanceSliderOutput">Low</span>
               </div>
             </div>
         </div>
@@ -253,7 +304,8 @@
           </button>
       </div>
       <div class="iniFilePreview">
-        <textarea name="iniFilePreviewTextArea" id="iniFilePreviewTextAreaId" cols="" rows=""></textarea>
+        <button class="copyTextButton" onclick="copyIniContent()"></button>
+        <textarea name="iniFilePreviewTextArea" id="iniFilePreviewTextAreaId" placeholder="Here you will see the ini file preview" cols="" rows=""></textarea>
       </div>
     </div>
     <div class="main-footer theme-light">

@@ -2,7 +2,10 @@
   margin: 0px;
   padding: 0px;
 }
-
+body {
+  font-family: Arial, sans-serif;
+  transition: background-color .5s;
+}
 /* MAIN PAGE LAYOUT*/
 .header-div {
   background-color: lightblue;
@@ -31,87 +34,9 @@
 }
 /* END MAIN PAGE LAYOUT*/
 
-/* START OF SIDEBAR */
-.sidebar-li {
-  display: block;
-  margin-bottom: 10px;
-  padding-bottom: 15px;
-}
-.sidebar-div {
-  align-items: center;
-  width: 350px;
-  height: 100dvh;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  background-color: grey;
-  box-sizing: inherit;
-}
-.settings-searcher {
-  padding: 5px;
-  background-color: white;
-  color: black;
-  border-radius: 10px;
-  text-align: center;
-}
-.sidebar-button {
-  width: 200px;
-  background: #007bff;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  margin-left: 20px;
-}
-.sidebar-button:hover {
-  background: #0055b1;
-  transition: ease-in-out .5s;
-}
-.selected {
-  background: #0f8000;
-}
-#search-button {
-  width: 50px;
-  height: 29px;
-  background: darkblue;
-  background: url('https://api.iconify.design/line-md/search-filled.svg') no-repeat center center / contain;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
- }
-/* END OF SIDEBAR*/
-
-body {
-  font-family: Arial, sans-serif;
-}
-
-.theme-light {
-  color: black;
-  background-color: lightgray;
-}
-
-/* DARKMODE THEME*/
-.theme-dark {
-  background-color: darkgray;
-  color: white;
-}
-
 h4{
   color: red;
 }
-/* QUESTION AND ANSWARES IN THE INFORMATION SECTION*/
-.FAQ {
-  text-align: center;
-  display: block;
-  padding: 0px;
-}
-.FAQ  li {
-  list-style: none;
-}
-/* END OF QUESTION AND ANSWARES IN THE INFORMATION SECTION*/
 
 .settings-label {
   display: block;
@@ -138,18 +63,7 @@ input[type="checkbox"] {
   background-color: #0056b3;
 }
 
-.toggle-switch-container {
-  width: 51px;
-  height: 31px;
-  position: relative;
-}
 
-.toggleSwitch {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
 
 .settings-switch {
   width: 100%;
@@ -183,91 +97,9 @@ input[type="checkbox"] {
   left: calc(50% - 27px / 2 + 10px);
   top: calc(50% - 27px / 2);
 }
-.footer {
-  text-align: center;
-  font-size: 12px;
-  border-top: 20px;
-}
 
-/* START OF THE THEME CHANGE SLIDER */
 
-.theme-switch {
-  height: 100px;
-  width: 200px;
-}
 
-/* The switch - the box around the slider */
-#theme-toggle-button {
-  font-size: 17px;
-  position: relative;
-  display: inline-block;
-  width: 7em;
-  cursor: pointer;
-}
-
-/* Hide default HTML checkbox */
-#toggle {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-#container,
-#patches,
-#stars,
-#button,
-#sun,
-#moon,
-#cloud {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 0.25s;
-}
-
-/* night sky background */
-#toggle:checked + svg #container {
-  fill: #2b4360;
-}
-
-/* move button to right when checked */
-#toggle:checked + svg #button {
-  transform: translate(28px, 2.333px);
-}
-
-/* show/hide sun and moon based on checkbox state */
-#sun {
-  opacity: 1;
-}
-
-#toggle:checked + svg #sun {
-  opacity: 0;
-}
-
-#moon {
-  opacity: 0;
-}
-
-#toggle:checked + svg #moon {
-  opacity: 1;
-}
-
-/* show or hide background items on checkbox state */
-#cloud {
-  opacity: 1;
-}
-
-#toggle:checked + svg #cloud {
-  opacity: 0;
-}
-
-#stars {
-  opacity: 0;
-}
-
-#toggle:checked + svg #stars {
-  opacity: 1;
-}
-/* END OF THE THEME CHANGE SLIDER */
 
 /* UPLOAD FILE BUTTON */
 .file-upload-label {
@@ -287,29 +119,28 @@ input[type="checkbox"] {
 .custom-file-input {
   display:none;
 }
+
 /* TEXTAREA */
 .iniFilePreview{
   height: 100dvh;
-  width: 50%;
+  max-width: 45%;
+  min-width: 45%;
   position: relative;
   background-color: transparent;
   float: right;
 }
 .iniFilePreview textarea{
   background-color: transparent;
-  color: white;
+  color: black;
   width: 100%;
   height: 100%;
   font-size: large;
   resize: none;
+  text-align: center;
+}
+.copyTextButton{
+  height: 20px;
+  width: 20px;
+  background: url('https://api.iconify.design/solar/copy-bold.svg') no-repeat center center / contain;
   
 }
-/* END TEXTAREA */
-
-/* FOOTER */
-
-.contact-us {
-  display: block;  
-}
-
-/* END FOOTER */

@@ -1,0 +1,8 @@
+.FAQ {
+    text-align: center;
+    display: block;
+    padding: 0px;
+  }
+  .FAQ  li {
+    list-style: none;
+  }
