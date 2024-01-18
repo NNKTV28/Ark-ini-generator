@@ -6,16 +6,27 @@
 /* MAIN PAGE LAYOUT*/
 .header-div {
   background-color: #83cbd8;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
+
 .main-wrapper {
   display: flex;
-  
 }
 .settingsContainer {
   flex-grow: 1;
   margin-top: 20px;
   background-color: transparent;
   padding-left: 20px;
+}
+.main-footer {
+  height: 200px;
+  width:auto;
+  background-color: #83cbd8;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
 }
 /* END MAIN PAGE LAYOUT*/
 
@@ -26,15 +37,19 @@
   padding-bottom: 15px;
 }
 .sidebar-div {
+  align-items: center;
   max-width: fit-content;
   height: 100dvh;
-  border: 2px solid #000; /* 2px solid black border */
   padding: 10px;
   background-color: grey;
   box-sizing: inherit;
 }
 .settings-searcher {
-  
+  padding: 5px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  text-align: center;
 }
 .sidebar-button {
   width: 200px;
@@ -43,7 +58,7 @@
   border: none;
   border-radius: 10px;
   color: white;
-  
+  cursor: pointer;
 }
 .sidebar-button:hover {
   background: #0055b1;
@@ -51,6 +66,16 @@
 .selected {
   background: #0f8000;
 }
+#search-button {
+  width: 48px;
+  background: transparent;
+  background-image: url(../IMAGES/gear.png);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+ }
 /* END OF SIDEBAR*/
 
 body {
@@ -62,9 +87,6 @@ body {
   background-color: gray;
 }
 
-h1, h4{
-  text-align: center;
-}
 h4{
   color: red;
 }
@@ -223,7 +245,6 @@ input[type="checkbox"] {
 #toggle:checked + svg #stars {
   opacity: 1;
 }
-
 /* END OF THE THEME CHANGE SLIDER */
 
 .file-upload-label {
@@ -238,3 +259,14 @@ input[type="checkbox"] {
 .custom-file-input {
   display:none;
 }
+
+/* FOOTER */
+
+.contact-us {
+  padding: 20px;
+  display: block;
+  margin-bottom: 10px;
+  padding-bottom: 15px;
+}
+
+/* END FOOTER */
