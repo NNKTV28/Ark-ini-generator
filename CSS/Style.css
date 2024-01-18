@@ -19,14 +19,15 @@
   margin-top: 20px;
   background-color: transparent;
   padding-left: 20px;
+  float: left;
 }
 .main-footer {
+  border-top: black 5px 5px;
+  padding: 0px;
   height: 200px;
-  width:auto;
-  background-color: #83cbd8;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
+  width: 100%;
+  background-color: lightblue;
+  text-align: center;
 }
 /* END MAIN PAGE LAYOUT*/
 
@@ -38,9 +39,11 @@
 }
 .sidebar-div {
   align-items: center;
-  max-width: fit-content;
+  width: 350px;
   height: 100dvh;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
   background-color: grey;
   box-sizing: inherit;
 }
@@ -59,17 +62,20 @@
   border-radius: 10px;
   color: white;
   cursor: pointer;
+  margin-left: 20px;
 }
 .sidebar-button:hover {
   background: #0055b1;
+  transition: ease-in-out .5s;
 }
 .selected {
   background: #0f8000;
 }
 #search-button {
-  width: 48px;
-  background: transparent;
-  background-image: url(../IMAGES/gear.png);
+  width: 50px;
+  height: 29px;
+  background: darkblue;
+  background: url('https://api.iconify.design/line-md/search-filled.svg') no-repeat center center / contain;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -82,14 +88,30 @@ body {
   font-family: Arial, sans-serif;
 }
 
+.theme-light {
+  color: black;
+  background-color: lightgray;
+}
+
 /* DARKMODE THEME*/
-.darkmode {
+.theme-dark {
   background-color: darkgray;
+  color: white;
 }
 
 h4{
   color: red;
 }
+/* QUESTION AND ANSWARES IN THE INFORMATION SECTION*/
+.FAQ {
+  text-align: center;
+  display: block;
+  padding: 0px;
+}
+.FAQ  li {
+  list-style: none;
+}
+/* END OF QUESTION AND ANSWARES IN THE INFORMATION SECTION*/
 
 .settings-label {
   display: block;
@@ -265,14 +287,29 @@ input[type="checkbox"] {
 .custom-file-input {
   display:none;
 }
+/* TEXTAREA */
+.iniFilePreview{
+  height: 100dvh;
+  width: 50%;
+  position: relative;
+  background-color: transparent;
+  float: right;
+}
+.iniFilePreview textarea{
+  background-color: transparent;
+  color: white;
+  width: 100%;
+  height: 100%;
+  font-size: large;
+  resize: none;
+  
+}
+/* END TEXTAREA */
 
 /* FOOTER */
 
 .contact-us {
-  padding: 20px;
-  display: block;
-  margin-bottom: 10px;
-  padding-bottom: 15px;
+  display: block;  
 }
 
 /* END FOOTER */

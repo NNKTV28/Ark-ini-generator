@@ -8,7 +8,7 @@ const sections = ['informationSection', 'modifyIniSection', 'modifySettingsSecti
 const uploadFileButton = document.getElementById('uploadAndDownloadButtons');
 const downloadDileButton = document.getElementById('downloadButton');
 let renderedSection = "";
-
+let defaultTheme = "light";
 let gameUserSettingsIni = "";
 let uploadedFile = false;
 const settings = {
@@ -170,8 +170,22 @@ function checkIfDownloadSuccessful() {
 
 // Toggle darkmode
 function toggleTheme() {
-  document.body.classList.toggle("darkmode");
-  document.getElementById("theme-toggle-button").checked = !document.getElementById("theme-toggle-button").checked;
+  if (defaultTheme === "light") {
+    document.querySelectorAll(".theme-light").forEach((element) => {
+      element.classList.toggle("theme-light");
+      element.classList.toggle("theme-dark");
+    })
+    defaultTheme = "dark";
+  }else{
+    document.querySelectorAll(".theme-dark").forEach((element) => {
+      element.classList.toggle("theme-dark");
+      element.classList.toggle("theme-light");
+    })
+    defaultTheme = "light";
+  }
+  
+  //document.body.classList.toggle("darkmode");
+  //document.getElementById("theme-toggle-button").checked = !document.getElementById("theme-toggle-button").checked;
 }
 
 // Display the selected file name in the custom file label
@@ -183,18 +197,9 @@ function displayFileName() {
   loadFileAsText();
 }
 
-function loadFileAsText() {
-  let fileToLoad = document.getElementById("gameUsersettingsFileInput")
-    .files[0];
-
-  let fileReader = new FileReader();
-  fileReader.onload = function (fileLoadedEvent) {
-    let textFromFileLoaded = fileLoadedEvent.target.result;
-    document.getElementById("gameUsersettingsFileInput").value = textFromFileLoaded;
-  };
-  fileReader.readAsText(fileToLoad, "UTF-8");
-
-  console.log("File loaded\n" + fileReader.value);
+async function loadFileAsText() {
+  let gameUserSettingsField = document.getElementById("gameUsersettingsFileInput");
+  gameUserSettingsIni = await gameUserSettingsField.files[0].text();
 }
 
 // Show only the selected section
@@ -236,16 +241,20 @@ function modifyIniSection(){
 function modifySettingsSection(){
 }
 function mapPingsSection(){
-  let notePings = document.getElementById('notePings');
+  let notePings = File.ReadAllText(MINI_MAP_NOTES);
+  console.log(notePings);
   if(renderedSection == 'mapPingsSection'){
     if(uploadedFile){
       if (gameUserSettingsIni.contains("HLN-A Discovery"))
       {
         notePings.value = "checked";
       }else{
+        
         // add the note pings content from MINI_MAP_NOTES.txt to the end of the uploaded iniFile
-        let notePingsContent = fetch(MINI_MAP_NOTES);
+        let notePingsContent = MINI_MAP_NOTES.text();
+        console.log(MINI_MAP_NOTES);
         gameUserSettingsIni += notePingsContent;
+        console.log(gameUserSettingsIni);
       }
         
     }
