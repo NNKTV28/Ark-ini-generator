@@ -1,31 +1,39 @@
+// Pings .txt files
 const MINI_MAP_NOTES = "../PingLocations/MINI_MAP_NOTES.txt";
 
+// File type and filename
 const FILE_TYPE = "text/plain";
 const FILENAME = "GameUserSettings.ini";
 
+// Ini file input (label)
 const iniFile = document.getElementById('gameUsersettingsFileInput');
+// Defined sections
 const sections = ['informationSection', 'modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
+// Upload file button
 const uploadFileButton = document.getElementById('uploadAndDownloadButtons');
+// Download file button
 const downloadDileButton = document.getElementById('downloadButton');
-let iniContent = document.getElementById("iniFilePreviewTextAreaId");
+// Ini file content text area
+const iniContent = document.getElementById("iniFilePreviewTextAreaId");
+// Main wrapper
+const mainWrapper = document.getElementById("main-wrapper");
+// PVP command text area
+let pvpCommandText = document.getElementById("pvpCommandPreviewTextAreaId")
+
+
 let renderedSection = "";
 let defaultTheme = "light";
 let gameUserSettingsIni = "";
 let uploadedFile = false;
-const settings = {
-  autoBrightness: "bUseAutoBrightness",
-  drawGrass: "bDrawGrass",
-  showTrees: "wp.Runtime.OverrideRuntimeSpatialHashLoadingRange -range"
-};
 
-/**
- * Finds the index of the [DISPLAY] section header in the gameUserSettingsIni string.
- * This allows us to insert new display settings at the correct location later.
- */
+// Defined ini file indexes needed
+const generalIndex = gameUserSettingsIni.indexOf("[GENERAL]");
+const graphicsIndex = gameUserSettingsIni.indexOf("[GRAPHICS]");
 const displayIndex = gameUserSettingsIni.indexOf("[DISPLAY]");
 const engineIndex = gameUserSettingsIni.indexOf("[Engine.RenderingSettings]");
 const scriptIndex = gameUserSettingsIni.indexOf("[Scripts/ShooterGame.ShooterGameUserSettings]");
 
+// Default .ini file in case none is uploaded by the user
 const defaultGameUserSettings =
 "[GENERAL]\nRenderResX=1920\nRenderResY=1080\n" +
 "[GRAPHICS]\nDefaultWindowMode=2\nScreenPercentage=100\nMaxShadowDistance=5000\n" +
@@ -63,134 +71,7 @@ shadowQualitySlider.oninput = function() {
   }
 }
 
-function generateIniFile() {
-  // check if user uploaded a file named GameUserSettings.ini
-  let gameUserSettingsField = document.getElementById(
-    "gameUsersettingsFileInput"
-  );
-  if (gameUserSettingsField.files.length === 0) {
-    gameUserSettingsIni = defaultGameUserSettings;
-    uploadedFile = false;
-  } else {
-    gameUserSettingsIni = gameUserSettingsField.files[0].text();
-    uploadedFile = true;
 
-    // TODO: check if the uploaded file is a valid gameUserSettingsIni file
-    // Parse the file and validate it contains expected sections
-    // If not, then show an error message and return
-    // If yes, then continue with the rest of the code
-    // Check if the file contains the [DISPLAY] section
-    if (!gameUserSettingsIni.includes("[DISPLAY]")) {
-      return;
-    }
-    // Check if the file contains the [Engine.RenderingSettings] section
-    if (!gameUserSettingsIni.includes("[Engine.RenderingSettings]")) {
-      return;
-    }
-    // Check if the file contains the [Scripts/ShooterGame.ShooterGameUserSettings] section
-    if (!gameUserSettingsIni.includes("[Scripts/ShooterGame.ShooterGameUserSettings]")) {
-      return;
-    }
-    // Check if the file contains the [GENERAL] section
-    if (!gameUserSettingsIni.includes("[GENERAL]")) {
-      return;
-    }
-    // check if the file is empty
-    if (gameUserSettingsIni.trim() === "") {
-      gameUserSettingsIni = defaultGameUserSettings;
-      uploadedFile = false;
-    }
-  }
-
-  // Check if the user wants to enable auto brightness
-  if (brightnessSwitch[0].checked) {
-    gameUserSettingsIni = gameUserSettingsIni.replace(
-      "bUseAutoBrightness=0",
-      "bUseAutoBrightness=1"
-    );
-  }else {
-    // Check if the user wants to disable auto brightness
-    gameUserSettingsIni = gameUserSettingsIni.replace(
-      "bUseAutoBrightness=1",
-      "bUseAutoBrightness=0"
-    );
-  }
-  // Check if the user wants to enable grass
-  if (grassSwitch[0].checked) {
-    gameUserSettingsIni = gameUserSettingsIni.replace(
-      "bDrawGrass=0",
-      "bDrawGrass=1"
-    );
-  }else {
-    // Check if the user wants to disable grass
-    gameUserSettingsIni = gameUserSettingsIni.replace(
-      "bDrawGrass=1",
-      "bDrawGrass=0"
-    );
-  }
-  // Check if the user wants to enable grass
-  if (grassSwitch[1].checked) {
-    gameUserSettingsIni = gameUserSettingsIni.replace(
-      "bDrawGrass=0",
-      "bDrawGrass=1"
-    );
-  }else{
-    gameUserSettingsIni = gameUserSettingsIni.replace(
-      "bDrawGrass=1",
-      "bDrawGrass=0"
-    );
-  }
-  downloadFile();
-  // Rest of submit handler
-};
-
-// Download the generated file
-function downloadFile() {
-  try {
-    const fileBlob = new Blob([gameUserSettingsIni], { type: FILE_TYPE });
-    const url = URL.createObjectURL(fileBlob);
-    const anchorTag = document.createElement("a");
-    anchorTag.style.display = "none";
-    anchorTag.href = url;
-    anchorTag.download = FILENAME;
-    document.body.appendChild(anchorTag);
-    anchorTag.click();
-
-    if (checkIfDownloadSuccessful()) {
-      setTimeout(() => {
-        document.body.removeChild(anchorTag);
-        URL.revokeObjectURL(url);
-      }, 100);
-    }
-  } catch (error) {
-    console.error("Failed to download file", error);
-  }
-}
-
-function checkIfDownloadSuccessful() {
-  // Logic to check if file download succeeded
-  return true;
-}
-
-// Toggle darkmode
-function toggleTheme() {
-  if (defaultTheme === "light") {
-    document.querySelectorAll(".theme-light").forEach((element) => {
-      element.classList.toggle("theme-light");
-      element.classList.toggle("theme-dark");
-    })
-    defaultTheme = "dark";
-  }else{
-    document.querySelectorAll(".theme-dark").forEach((element) => {
-      element.classList.toggle("theme-dark");
-      element.classList.toggle("theme-light");
-    })
-    defaultTheme = "light";
-  }
-  
-  //document.body.classList.toggle("darkmode");
-  //document.getElementById("theme-toggle-button").checked = !document.getElementById("theme-toggle-button").checked;
-}
 
 // Display the selected file name in the custom file label
 function displayFileName() {
@@ -207,94 +88,23 @@ async function loadFileAsText() {
   showIniContent();
 }
 
-// Show only the selected section
-function showSection(sectionId, buttonId) {
-  // Hide all sections
-  sections.forEach(section => {
-      document.getElementById(section).style.display = 'none';
-  });  
-
-  // Remove 'selected' class from all buttons
-  const buttons = document.querySelectorAll('.sidebar-button');
-  buttons.forEach(btn => {
-      btn.classList.remove('selected');
-  });
-
-  // Show the selected section
-  document.getElementById(sectionId).style.display = 'block';
-
-  // Add 'selected' class to the clicked button
-  if(buttonId == null){
-    alert("Button id is null")
-  }else
-  {
-    document.getElementById(buttonId.id).classList.add('selected');
-    renderedSection = sectionId;
-    
-    if(renderedSection == 'informationSection' || renderedSection == 'pvpSettingsSection'){
-      uploadFileButton.style.display = 'none';
-      downloadDileButton.style.display = 'none';
-    }else{
-      uploadFileButton.style.display = 'block';
-      downloadDileButton.style.display = 'block';
-    }
-  } 
-}
-
-function modifyIniSection(){
-}
-function modifySettingsSection(){
-}
-function mapPingsSection(){
-  let notePings = File.ReadAllText(MINI_MAP_NOTES);
-  console.log(notePings);
-  if(renderedSection == 'mapPingsSection'){
-    if(uploadedFile){
-      if (gameUserSettingsIni.contains("HLN-A Discovery"))
-      {
-        notePings.value = "checked";
-      }else{
-        
-        // add the note pings content from MINI_MAP_NOTES.txt to the end of the uploaded iniFile
-        let notePingsContent = MINI_MAP_NOTES.text();
-        console.log(MINI_MAP_NOTES);
-        gameUserSettingsIni += notePingsContent;
-        console.log(gameUserSettingsIni);
-      }
-        
-    }
-  }
-}
-function pvpSettingsSection(){
-  if(renderedSection == 'pvpSettingsSection'){
-    let initialCommand = "";
-    let checked = document.querySelectorAll(".pvpSettingsCommandCheckbox");
-    let command = document.querySelectorAll(".pvpSettingsCommand");
-    iniContent = initialCommand;
-
-    iniContent.value = gameUserSettingsIni;
-  }
-
-}
-function visualSettingsSection(){
-  if(renderedSection == 'visualSettingsSection'){
-    if(uploadedFile){
-      if (gameUserSettingsIni.contains("bUseAutoBrightness=true")){
-        brightnessSwitch[0].checked = true;
-        console.log(brightnessSwitch[0].checked);
-      }
-    }
-  }
-}
 function showIniContent(){
-  iniContent.value = gameUserSettingsIni;
+  if(renderedSection != 'informationSection' && renderedSection!='pvpSettingsSection'){
+    iniContent.value = gameUserSettingsIni;  
+  }
 }
 function copyIniContent(){
   iniContent.select();
   document.execCommand("copy");
 }
 
-let mainWrapper = document.getElementById("main-wrapper");
+
+function copyPvpCommand(){
+  pvpCommandText.select();
+  document.execCommand("copy");
+}
+
+
 function openNav() {
   document.getElementById("sidebar-div").style.width = "250px";
   mainWrapper.style.marginLeft = "250px";

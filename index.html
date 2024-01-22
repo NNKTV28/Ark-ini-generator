@@ -141,14 +141,12 @@
             <button id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">Visual settings</button>
           </li>
         </ul>
-    </div>
-      
-      
+      </div>
 
       <div class="settingsContainer theme-light">
         <div class="uploadAndDownloadButtons" id="uploadAndDownloadButtons" style="display: none;">
           <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
-          <input type="file" accept=".ini" value="" id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br><br>
+          <input type="file" accept=".ini"  id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br><br>
         </div>
 
         <div id="informationSection" class="information-section" style="display: block;">
@@ -198,11 +196,12 @@
         </div>
 
         <div id="pvpSettingsSection" class="pvp-settings-section" style="display: none;">
+          <div id="settings-sliders">
             Disable Grass
             <p class="component-title"></p>
             <div class="toggle-switch-container">
-              <input type="checkbox" name="disableGrass" class="pvpSettingsCommandCheckbox" id="pvpGrassSwitch"/>
-              <label class="pvp-switch" for="pvpGrassSwitch">
+              <input type="checkbox" name="disableGrass" class="toggleSwitch" id="pvpGrassSwitch" onchange="togglePvpSetting(this)"/>
+              <label class="settings-switch" for="pvpGrassSwitch">
                 <span class="settings-slider"></span>
               </label>
             </div>
@@ -210,8 +209,8 @@
             Disable trees
             <p class="component-title"></p>
             <div class="toggle-switch-container">
-              <input type="checkbox" name="drawGrass" value="" class="pvpSettingsCommandCheckbox" id="pvpTreesSwitch"/>
-              <label class="pvp-switch" for="pvpTreesSwitch">
+              <input type="checkbox" name="drawGrass"  class="toggleSwitch" id="pvpTreesSwitch" onchange="togglePvpSetting(this)"/>
+              <label class="settings-switch" for="pvpTreesSwitch">
                 <span class="settings-slider"></span>
               </label>
             </div>
@@ -219,8 +218,8 @@
             Disable Fog
             <p class="component-title"></p>
             <div class="toggle-switch-container">
-              <input type="checkbox" name="showTrees" value="" class="pvpSettingsCommandCheckbox" id="pvpDisableFogSwitch"/>
-              <label class="pvp-switch" for="pvpDisableFogSwitch">
+              <input type="checkbox" name="showTrees"  class="toggleSwitch" id="pvpDisableFogSwitch" onchange="togglePvpSetting(this)"/>
+              <label class="settings-switch" for="pvpDisableFogSwitch">
                 <span class="settings-slider"></span>
               </label>
             </div>
@@ -228,22 +227,21 @@
             Disable volumetric clouds
             <p class="component-title"></p>
             <div class="toggle-switch-container">
-              <input type="checkbox" name="toggleVolumetricClouds" value="" class="pvpSettingsCommandCheckbox" id="pvpVolumetricCloudsSwitch"/>
-              <label class="pvp-switch" for="pvpVolumetricCloudsSwitch">
+              <input type="checkbox" name="toggleVolumetricClouds"  class="toggleSwitch" id="pvpVolumetricCloudsSwitch" onchange="togglePvpSetting(this)"/>
+              <label class="settings-switch" for="pvpVolumetricCloudsSwitch">
                 <span class="settings-slider"></span>
               </label>
             </div>
 
-            Disable  Lumen Reflections
+            Disable Lumen Reflections
             <p class="component-title"></p>
             <div class="toggle-switch-container">
-              <input type="checkbox" name="toggleVolumetricClouds" value="" class="pvpSettingsCommandCheckbox" id="pvpLumenReflections"/>
-              <label class="pvp-switch" for="pvpLumenReflections">
+              <input type="checkbox" name="toggleVolumetricClouds"  class="toggleSwitch" id="pvpLumenReflections" onchange="togglePvpSetting(this)"/>
+              <label class="settings-switch" for="pvpLumenReflections">
                 <span class="settings-slider"></span>
               </label>
             </div>
-
-             r.Water.SingleLayer.Reflection 0 | r.LightShaftQuality 0 | | r.Lumen.Reflections.Allow 0 | r.Lumen.DiffuseIndirect.Allow 0 | r.Shadow.Virtual.Enable 0 | r.Shadow.CSM.MaxCascades 0 | sg.FoliageQuality 0 | sg.TextureQuality 0 | wp.Runtime.HLOD 0 | r.MipMapLODBias 1 | r.DistanceFieldShadowing 0 | r.Streaming.PoolSize 1 | r.Nanite.MaxPixelsPerEdge 4 | r.Lumen.ScreenProbeGather.RadianceCache.ProbeResolution 16 | r.PostProcessing.DisableMaterials 1 | r.ContactShadows 0 | r.depthoffieldquality 0 | r.depthoffieldquality 0 | r.fog 0 | r.lightshafts 0 | r.LightCulling.Quality 0 | foliage.LODDistanceScale 0 | r.shadowquality 0 | r.DynamicGlobalIlluminationMethod 0 | r.SkylightIntensityMultiplier 5 | r.Shading.FurnaceTest.SampleCount 0 | r.ScreenPercentage 50 | r.detailmode 0 | r.viewdistance 0 | r.foliage.WPODisableMultiplier 1 | r.foliage.AutoBoundsWPODisableMax 1 | r.Shading.FurnaceTest 1 | r.Shading.EnergyConservation 0
+          </div>
         </div>
 
         <div id="visualSettingsSection" class="visual-settings-section" style="display: none;">
@@ -303,10 +301,16 @@
             Generate INI
           </button>
       </div>
-      <div class="iniFilePreview">
+      <div class="iniFilePreview" id="iniFilePreviewId" style="display: none;">
         <button class="copyTextButton" onclick="copyIniContent()"></button>
         <textarea name="iniFilePreviewTextArea" id="iniFilePreviewTextAreaId" placeholder="Here you will see the ini file preview" cols="" rows=""></textarea>
       </div>
+
+      <div class="pvpCommandPreview" id="pvpCommandPreviewId" style="display: none;">
+        <button class="copyTextButton" onclick="copyPvpCommand()"></button>
+        <textarea name="pvpCommandPreviewTextArea" id="pvpCommandPreviewTextAreaId" placeholder="Your PVP command to copy" cols="" rows=""></textarea>
+      </div>
+
     </div>
     <div class="main-footer theme-light">
         <div class="contact-us">
@@ -318,5 +322,9 @@
         </div>
     </div>
     <script src="./JS/index.js"></script>
+    <script src="./JS/downloadFile.js"></script>
+    <script src="./JS/sectionFunctions.js"></script>
+    <script src="./JS/theme.js"></script>
+    <script src="./JS/pvpCommandSection.js"></script>
   </body>
 </html>

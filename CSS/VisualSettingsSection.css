@@ -1,3 +1,26 @@
+/* The slider */
+.settings-slider {
+  width: 27px;
+  height: 27px;
+  position: absolute;
+  left: calc(50% - 27px / 2 - 10px);
+  top: calc(50% - 27px / 2);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+
+.toggleSwitch:checked + .settings-switch {
+  background-color: #34c759;
+}
+
+.toggleSwitch:checked + .settings-switch .settings-slider {
+  left: calc(50% - 27px / 2 + 10px);
+  top: calc(50% - 27px / 2);
+}
+
 .toggle-switch-container {
     width: 51px;
     height: 31px;
