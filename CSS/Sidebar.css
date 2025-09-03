@@ -22,18 +22,21 @@
     text-align: center;
   }
   .sidebar-button {
-    width: 200px;
-    background: #007bff;
-    padding: 10px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 10px;
-    color: white;
+    border-radius: 4px;
+    background: #f0f0f0;
     cursor: pointer;
-    margin-left: 20px;
+    transition: all 0.2s;
   }
   .sidebar-button:hover {
-    background: #0055b1;
-    transition: ease-in-out .5s;
+    background: #e0e0e0;
+    transform: translateY(-1px);
+  }
+  .sidebar-button.selected {
+    background: #4CAF50;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   .selected {
     background: #0f8000;

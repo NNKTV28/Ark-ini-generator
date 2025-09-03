@@ -71,7 +71,87 @@ shadowQualitySlider.oninput = function() {
   }
 }
 
+<<<<<<< Updated upstream
 
+=======
+async function generateIniFile() {
+  const gameUserSettingsField = document.getElementById("gameUsersettingsFileInput");
+  
+  if (gameUserSettingsField.files.length === 0) {
+    gameUserSettingsIni = defaultGameUserSettings;
+    uploadedFile = false;
+  } else {
+    try {
+      await loadFileAsText();
+      uploadedFile = true;
+      
+      // Validate file content
+      if (!gameUserSettingsIni.includes("[DISPLAY]") ||
+          !gameUserSettingsIni.includes("[Engine.RenderingSettings]") ||
+          !gameUserSettingsIni.includes("[Scripts/ShooterGame.ShooterGameUserSettings]") ||
+          !gameUserSettingsIni.includes("[GENERAL]")) {
+        throw new Error("Invalid INI file format");
+      }
+    } catch (err) {
+      console.error("Error loading file:", err);
+      gameUserSettingsIni = defaultGameUserSettings;
+      uploadedFile = false;
+    }
+  }
+
+  // Update settings
+  updateSettings();
+  downloadFile();
+}
+
+// Download the generated file
+function downloadFile() {
+  try {
+    const fileBlob = new Blob([gameUserSettingsIni], { type: FILE_TYPE });
+    const url = URL.createObjectURL(fileBlob);
+    const anchorTag = document.createElement("a");
+    anchorTag.style.display = "none";
+    anchorTag.href = url;
+    anchorTag.download = FILENAME;
+    document.body.appendChild(anchorTag);
+    anchorTag.click();
+
+    if (checkIfDownloadSuccessful()) {
+      setTimeout(() => {
+        document.body.removeChild(anchorTag);
+        URL.revokeObjectURL(url);
+      }, 100);
+    }
+  } catch (error) {
+    console.error("Failed to download file", error);
+  }
+}
+
+function checkIfDownloadSuccessful() {
+  // Logic to check if file download succeeded
+  return true;
+}
+
+// Toggle darkmode
+function toggleTheme() {
+  if (defaultTheme === "light") {
+    document.querySelectorAll(".theme-light").forEach((element) => {
+      element.classList.toggle("theme-light");
+      element.classList.toggle("theme-dark");
+    })
+    defaultTheme = "dark";
+  }else{
+    document.querySelectorAll(".theme-dark").forEach((element) => {
+      element.classList.toggle("theme-dark");
+      element.classList.toggle("theme-light");
+    })
+    defaultTheme = "light";
+  }
+  
+  //document.body.classList.toggle("darkmode");
+  //document.getElementById("theme-toggle-button").checked = !document.getElementById("theme-toggle-button").checked;
+}
+>>>>>>> Stashed changes
 
 // Display the selected file name in the custom file label
 function displayFileName() {
@@ -83,11 +163,109 @@ function displayFileName() {
 }
 
 async function loadFileAsText() {
-  let gameUserSettingsField = document.getElementById("gameUsersettingsFileInput");
-  gameUserSettingsIni = await gameUserSettingsField.files[0].text();
-  showIniContent();
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.className = 'loading-spinner';
+  document.body.appendChild(loadingIndicator);
+
+  try {
+    const file = document.getElementById("gameUsersettingsFileInput").files[0];
+    const reader = new FileReader();
+    
+    const result = await new Promise((resolve, reject) => {
+      reader.onload = (e) => resolve(e.target.result);
+      reader.onerror = reject;
+      reader.readAsText(file);
+    });
+
+    gameUserSettingsIni = result;
+    showIniContent();
+  } finally {
+    document.body.removeChild(loadingIndicator);
+  }
 }
 
+<<<<<<< Updated upstream
+=======
+// Show only the selected section
+function showSection(sectionId, buttonId) {
+  // Hide all sections
+  sections.forEach(section => {
+      document.getElementById(section).style.display = 'none';
+  });  
+
+  // Remove 'selected' class from all buttons
+  const buttons = document.querySelectorAll('.sidebar-button');
+  buttons.forEach(btn => {
+      btn.classList.remove('selected');
+  });
+
+  // Show the selected section
+  document.getElementById(sectionId).style.display = 'block';
+
+  // Add 'selected' class to the clicked button
+  if(buttonId == null){
+    alert("Button id is null")
+  }else
+  {
+    document.getElementById(buttonId.id).classList.add('selected');
+    renderedSection = sectionId;
+    
+    if(renderedSection == 'informationSection' || renderedSection == 'pvpSettingsSection'){
+      uploadFileButton.style.display = 'none';
+      downloadDileButton.style.display = 'none';
+    }else{
+      uploadFileButton.style.display = 'block';
+      downloadDileButton.style.display = 'block';
+    }
+  } 
+}
+
+function modifyIniSection(){
+}
+function modifySettingsSection(){
+}
+function mapPingsSection(){
+  let notePings = File.ReadAllText(MINI_MAP_NOTES);
+  console.log(notePings);
+  if(renderedSection == 'mapPingsSection'){
+    if(uploadedFile){
+      if (gameUserSettingsIni.contains("HLN-A Discovery"))
+      {
+        notePings.value = "checked";
+      }else{
+        
+        // add the note pings content from MINI_MAP_NOTES.txt to the end of the uploaded iniFile
+        let notePingsContent = MINI_MAP_NOTES.text();
+        console.log(MINI_MAP_NOTES);
+        gameUserSettingsIni += notePingsContent;
+        console.log(gameUserSettingsIni);
+      }
+        
+    }
+  }
+}
+function pvpSettingsSection(){
+  if(renderedSection == 'pvpSettingsSection'){
+    let initialCommand = "";
+    let checked = document.querySelectorAll(".pvpSettingsCommandCheckbox");
+    let command = document.querySelectorAll(".pvpSettingsCommand");
+    iniContent = initialCommand;
+
+    iniContent.value = gameUserSettingsIni;
+  }
+
+}
+function visualSettingsSection(){
+  if(renderedSection == 'visualSettingsSection'){
+    if(uploadedFile){
+      if (gameUserSettingsIni.includes("bUseAutoBrightness=true")){
+        brightnessSwitch[0].checked = true;
+        console.log(brightnessSwitch[0].checked);
+      }
+    }
+  }
+}
+>>>>>>> Stashed changes
 function showIniContent(){
   if(renderedSection != 'informationSection' && renderedSection!='pvpSettingsSection'){
     iniContent.value = gameUserSettingsIni;  
@@ -111,12 +289,44 @@ function openNav() {
   document.getElementById("closebtn").style.background = "url('https://api.iconify.design/line-md/menu-to-close-transition.svg') no-repeat center center / contain;";
 }
 function closeNav() {
-  document.getElementById("sidebar-div").style.width = "50px";
-  document.getElementById("sidebar-div").style.overflow = "hidden";
-  document.getElementById("closebtn").style.background = "url('https://api.iconify.design/line-md/close-to-menu-transition.svg') no-repeat center center / contain;";
+  const sidebarDiv = document.getElementById("sidebar-div");
+  const buttons = document.querySelectorAll(".sidebar-button");
+  
+  sidebarDiv.style.width = "50px";
+  sidebarDiv.style.overflow = "hidden";
+  
+  buttons.forEach(btn => {
+    btn.style.width = "40px";
+    btn.style.padding = "10px 5px"; 
+    btn.style.textIndent = "-9999px";
+  });
 
-  document.querySelectorAll(".sidebar-button").style.width = "40px";
-  document.querySelectorAll(".sidebar-button").style.padding = "10px 5px";
-  document.querySelectorAll(".sidebar-button").style.textIndent = "-9999px";
-  mainWrapper.style.marginLeft= "50";
+  mainWrapper.style.marginLeft = "50px";
+  
+  document.getElementById("closebtn").style.background = "url('https://api.iconify.design/line-md/close-to-menu-transition.svg') no-repeat center center / contain";
+}
+
+function toggleNav() {
+  const sidebarDiv = document.getElementById("sidebar-div");
+  const isOpen = sidebarDiv.style.width === "250px";
+  
+  if (isOpen) {
+    closeNav();
+  } else {
+    openNav();
+  }
+}
+
+function updateSettings() {
+  // Auto brightness
+  gameUserSettingsIni = gameUserSettingsIni.replace(
+    /bUseAutoBrightness=[01]/,
+    `bUseAutoBrightness=${brightnessSwitch[0].checked ? 1 : 0}`
+  );
+
+  // Draw grass
+  gameUserSettingsIni = gameUserSettingsIni.replace(
+    /bDrawGrass=[01]/,
+    `bDrawGrass=${grassSwitch[0].checked ? 1 : 0}`
+  );
 }
