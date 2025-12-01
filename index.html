@@ -1,330 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ark GameUserSettings.ini Generator</title>
-    <link rel="stylesheet" href="./CSS/Footer.css" />
-    <link rel="stylesheet" href="./CSS/Header.css" />
-    <link rel="stylesheet" href="./CSS/InformationSection.css" />
-    <link rel="stylesheet" href="./CSS/ModifyIniSection.css" />
-    <link rel="stylesheet" href="./CSS/ModifySettingsSection.css" />
-    <link rel="stylesheet" href="./CSS/PvpSettingsSection.css" />
-    <link rel="stylesheet" href="./CSS/Sidebar.css" />
-    <link rel="stylesheet" href="./CSS/Style.css" />
-    <link rel="stylesheet" href="./CSS/Themes.css" />
-    <link rel="stylesheet" href="./CSS/VisualSettingsSection.css" />
-    
+    <link rel="stylesheet" href="./CSS/Modern.css" />
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  </head>
-  <body>
-    <header>
-      <div class="header-div">
-        <div class="theme-switch">
-          <label id="theme-toggle-button">
-            <input type="checkbox" id="toggle" onclick="toggleTheme()"/>
-            <svg viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-              <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
-                <g filter="url(#container)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
-                  <rect fill="#83cbd8" transform="translate(3.5 3.5)" rx="17.5" height="35" width="60.667" data-name="container" id="container"></rect>
-                </g>
-
-                <g transform="translate(2.333 2.333)" id="button">
-                  <g data-name="sun" id="sun">
-                    <g filter="url(#sun-outer)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
-                      <circle fill="#f8e664" transform="translate(5.83 5.83)" r="15.167"cy="15.167" cx="15.167" data-name="sun-outer" id="sun-outer-2"></circle>
-                    </g>
-                    <g filter="url(#sun)" transform="matrix(1, 0, 0, 1, -5.83, -5.83)">
-                      <path fill="rgba(246,254,247,0.29)" transform="translate(9.33 9.33)" d="M11.667,0A11.667,11.667,0,1,1,0,11.667,11.667,11.667,0,0,1,11.667,0Z" data-name="sun" id="sun-3"></path>
-                    </g>
-                    <circle fill="#fcf4b9" transform="translate(8.167 8.167)" r="7" cy="7" cx="7" id="sun-inner"></circle>
-                  </g>
-
-                  <g data-name="moon" id="moon">
-                    <g filter="url(#moon)" transform="matrix(1, 0, 0, 1, -31.5, -5.83)">
-                      <circle fill="#cce6ee" transform="translate(31.5 5.83)" r="15.167" cy="15.167" cx="15.167" data-name="moon" id="moon-3"></circle>
-                    </g>
-                    <g fill="#a6cad0" transform="translate(-24.415 -1.009)" id="patches">
-                      <circle transform="translate(43.009 4.496)" r="2" cy="2" cx="2"></circle>
-                      <circle transform="translate(39.366 17.952)" r="2" cy="2" cx="2" data-name="patch"></circle>
-                      <circle transform="translate(33.016 8.044)" r="1" cy="1" cx="1" data-name="patch"></circle>
-                      <circle transform="translate(51.081 18.888)" r="1" cy="1" cx="1"data-name="patch"></circle>
-                      <circle transform="translate(33.016 22.503)"  r="1" cy="1" cx="1"data-name="patch"></circle>
-                      <circle transform="translate(50.081 10.53)" r="1.5" cy="1.5" cx="1.5" data-name="patch"></circle>
-                    </g>
-                  </g>
-                </g>
-
-                <g filter="url(#cloud)" transform="matrix(1, 0, 0, 1, -3.5, -3.5)">
-                  <path
-                    fill="#fff"
-                    transform="translate(-3466.47 -160.94)"
-                    d="M3512.81,173.815a4.463,4.463,0,0,1,2.243.62.95.95,0,0,1,.72-1.281,4.852,4.852,0,0,1,2.623.519c.034.02-.5-1.968.281-2.716a2.117,2.117,0,0,1,2.829-.274,1.821,1.821,0,0,1,.854,1.858c.063.037,2.594-.049,3.285,1.273s-.865,2.544-.807,2.626a12.192,12.192,0,0,1,2.278.892c.553.448,1.106,1.992-1.62,2.927a7.742,7.742,0,0,1-3.762-.3c-1.28-.49-1.181-2.65-1.137-2.624s-1.417,2.2-2.623,2.2a4.172,4.172,0,0,1-2.394-1.206,3.825,3.825,0,0,1-2.771.774c-3.429-.46-2.333-3.267-2.2-3.55A3.721,3.721,0,0,1,3512.81,173.815Z"
-                    data-name="cloud"
-                    id="cloud"
-                  ></path>
-                </g>
-
-                <g fill="#def8ff" transform="translate(3.585 1.325)" id="stars">
-                  <path
-                    transform="matrix(-1, 0.017, -0.017, -1, 24.231, 3.055)"
-                    d="M.774,0,.566.559,0,.539.458.933.25,1.492l.485-.361.458.394L1.024.953,1.509.592.943.572Z"
-                  ></path>
-                  <path
-                    transform="matrix(-0.777, 0.629, -0.629, -0.777, 23.185, 12.358)"
-                    d="M1.341.529.836.472.736,0,.505.46,0,.4.4.729l-.231.46L.605.932l.4.326L.9.786Z"
-                    data-name="star"
-                  ></path>
-                  <path
-                    transform="matrix(0.438, 0.899, -0.899, 0.438, 23.177, 29.735)"
-                    d="M.015,1.065.475.9l.285.365L.766.772l.46-.164L.745.494.751,0,.481.407,0,.293.285.658Z"
-                    data-name="star"
-                  ></path>
-                  <path
-                    transform="translate(12.677 0.388) rotate(104)"
-                    d="M1.161,1.6,1.059,1,1.574.722.962.607.86,0,.613.572,0,.457.446.881.2,1.454l.516-.274Z"
-                    data-name="star"
-                  ></path>
-                  <path
-                    transform="matrix(-0.07, 0.998, -0.998, -0.07, 11.066, 15.457)"
-                    d="M.873,1.648l.114-.62L1.579.945,1.03.62,1.144,0,.706.464.157.139.438.7,0,1.167l.592-.083Z"
-                    data-name="star"
-                  ></path>
-                  <path
-                    transform="translate(8.326 28.061) rotate(11)"
-                    d="M.593,0,.638.724,0,.982l.7.211.045.724.36-.64.7.211L1.342.935,1.7.294,1.063.552Z"
-                    data-name="star"
-                  ></path>
-                  <path
-                    transform="translate(5.012 5.962) rotate(172)"
-                    d="M.816,0,.5.455,0,.311.323.767l-.312.455.516-.215.323.456L.827.911,1.343.7.839.552Z"
-                    data-name="star"
-                  ></path>
-                  <path
-                    transform="translate(2.218 14.616) rotate(169)"
-                    d="M1.261,0,.774.571.114.3.487.967,0,1.538.728,1.32l.372.662.047-.749.728-.218L1.215.749Z"
-                    data-name="star"
-                  ></path>
-                </g>
-              </g>
-            </svg>
-          </label>
-        </div>
-        <h1>GameUserSettings.ini Generator</h1>
-        <h4>This is only for Ark Survival Ascended</h4>
-      </div>
-    </header>
-
-    <div class="main-wrapper theme-light" id="main-wrapper">
-      <div class="sidebar-div" id="sidebar-div">
-        <ul class="sidebar-ul">
-          <li class="sidebar-li searchbar-and-close-sidebar">
-            <input id="settings-searcher" type="text" class="settings-searcher" placeholder="Search setting"/>
-            <button id="closebtn" class="closebtn" onclick="closeNav()"></button>
-          </li>
-          <li class="sidebar-li">
-            <button id="informationButton" class="sidebar-button selected" onclick="showSection('informationSection', this)">Information</button>
-          </li>
-          <li class="sidebar-li">
-            <button id="modifyIniButton" class="sidebar-button" onclick="showSection('modifyIniSection', this)">Modify .ini</button>
-          </li>
-          <li class="sidebar-li">
-            <button id="modifySettingsButton" class="sidebar-button" onclick="showSection('modifySettingsSection', this)">Modify settings</button>
-          </li>
-          <li class="sidebar-li">
-            <button id="mapPingsButton" class="sidebar-button" onclick="showSection('mapPingsSection', this)">Map pings</button>
-          </li>
-          <li class="sidebar-li">
-            <button id="pvpSettingsButton" class="sidebar-button" onclick="showSection('pvpSettingsSection', this)">PVP settings</button>
-          </li>
-          <li class="sidebar-li">
-            <button id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">Visual settings</button>
-          </li>
-        </ul>
-      </div>
-
-      <div class="settingsContainer theme-light">
-        <div class="uploadAndDownloadButtons" id="uploadAndDownloadButtons" style="display: none;">
-          <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">Upload .ini</label>
-          <input type="file" accept=".ini"  id="gameUsersettingsFileInput" onchange="displayFileName()" class="custom-file-input"/><br><br>
-        </div>
-
-        <div id="informationSection" class="information-section" style="display: block;">
-            <p>This is a site to make your own GameUserSettings.ini file or to modify one that you upload</p>
-            <div class="FAQ">
-              <ul>
-                <li class="faqTitle"><h1>FAQ</h1></li>
-                <li class="Question">What is a GameUserSettings.ini file?</li>
-                <li class="Answare">The GameUserSettings. ini file contains options for both the game client and the game server.</li><br>
-
-                <li class="Question">Where is the GameUserSettings.ini file?</li>
-                <li class="Answare">Its located in "SteamLibrary\steamapps\common\ARK Survival Ascended\ShooterGame\Saved\Config\Windows\GameUserSettings.ini"?</li><br>
-
-                <li class="Question">What does this website do?</li>
-                <li class="Answare">This website generates a .ini file based on the options you select</li><br>
-
-                <li class="Question">What is a GameUserSettings.ini file?</li>
-                <li class="Answare">What is a GameUserSettings.ini file?</li><br>
-              </ul>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar-div">
+            <div class="sidebar-header">
+                <h2>Ark INI Generator</h2>
             </div>
-        </div>
-
-        <div id="modifyIniSection" class="modify-ini-section" style="display: none;">
             
-        </div>
-
-        <div id="modifySettingsSection" class="modify-settings-section" style="display: none;">
-        </div>
-
-        <div id="mapPingsSection" class="map-pings-section" style="display: none;">
-            <div class="settings-pings" >
-              <label class="settings-label">
-                <input type="checkbox" name="resourcePings" value="resourcePings"/>
-                Resource Pings
-              </label>
-
-              <label class="settings-label">
-                <input type="checkbox" name="cavePings" value="cavePings"/>
-                Cave Pings
-              </label>
-
-              <label class="settings-label">
-                <input type="checkbox" name="notePings" id="notePings" value="notePings"/>
-                Note Pings
-              </label>
-            </div>
-        </div>
-
-        <div id="pvpSettingsSection" class="pvp-settings-section" style="display: none;">
-          <div id="settings-sliders">
-            Disable Grass
-            <p class="component-title"></p>
-            <div class="toggle-switch-container">
-              <input type="checkbox" name="disableGrass" class="toggleSwitch" id="pvpGrassSwitch" onchange="togglePvpSetting(this)"/>
-              <label class="settings-switch" for="pvpGrassSwitch">
-                <span class="settings-slider"></span>
-              </label>
+            <div class="search-box">
+                <iconify-icon icon="line-md:search" class="search-icon"></iconify-icon>
+                <input id="settings-searcher" type="text" placeholder="Search setting..." />
             </div>
 
-            Disable trees
-            <p class="component-title"></p>
-            <div class="toggle-switch-container">
-              <input type="checkbox" name="drawGrass"  class="toggleSwitch" id="pvpTreesSwitch" onchange="togglePvpSetting(this)"/>
-              <label class="settings-switch" for="pvpTreesSwitch">
-                <span class="settings-slider"></span>
-              </label>
-            </div>
-
-            Disable Fog
-            <p class="component-title"></p>
-            <div class="toggle-switch-container">
-              <input type="checkbox" name="showTrees"  class="toggleSwitch" id="pvpDisableFogSwitch" onchange="togglePvpSetting(this)"/>
-              <label class="settings-switch" for="pvpDisableFogSwitch">
-                <span class="settings-slider"></span>
-              </label>
-            </div>
-
-            Disable volumetric clouds
-            <p class="component-title"></p>
-            <div class="toggle-switch-container">
-              <input type="checkbox" name="toggleVolumetricClouds"  class="toggleSwitch" id="pvpVolumetricCloudsSwitch" onchange="togglePvpSetting(this)"/>
-              <label class="settings-switch" for="pvpVolumetricCloudsSwitch">
-                <span class="settings-slider"></span>
-              </label>
-            </div>
-
-            Disable Lumen Reflections
-            <p class="component-title"></p>
-            <div class="toggle-switch-container">
-              <input type="checkbox" name="toggleVolumetricClouds"  class="toggleSwitch" id="pvpLumenReflections" onchange="togglePvpSetting(this)"/>
-              <label class="settings-switch" for="pvpLumenReflections">
-                <span class="settings-slider"></span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div id="visualSettingsSection" class="visual-settings-section" style="display: none;">
-            <div id="settings-sliders">
-              Auto Brightness
-              <p class="component-title"></p>
-              <div class="toggle-switch-container">
-                <input type="checkbox" name="autoBrightness" class="toggleSwitch" id="brightnessSwitch"/>
-                <label class="settings-switch" for="brightnessSwitch">
-                  <span class="settings-slider"></span>
-                </label>
-              </div>
-
-              Draw Grass
-              <p class="component-title"></p>
-              <div class="toggle-switch-container">
-                <input type="checkbox" name="drawGrass" value="drawGrass" class="toggleSwitch" id="grassSwitch"/>
-                <label class="settings-switch" for="grassSwitch">
-                  <span class="settings-slider"></span>
-                </label>
-              </div>
-
-              Show trees
-              <p class="component-title"></p>
-              <div class="toggle-switch-container">
-                <input type="checkbox" name="showTrees" value="showTrees" class="toggleSwitch" id="treesSwitch"/>
-                <label class="settings-switch" for="treesSwitch">
-                  <span class="settings-slider"></span>
-                </label>
-              </div>
-
-              Volumetric clouds
-              <p class="component-title"></p>
-              <div class="toggle-switch-container">
-                <input type="checkbox" name="toggleVolumetricClouds" value="toggleVolumetricClouds" class="toggleSwitch" id="volumetricCloudsSwitch"/>
-                <label class="settings-switch" for="volumetricCloudsSwitch">
-                  <span class="settings-slider"></span>
-                </label>
-              </div>
-
-              Shadow quality
-              <p class="component-title"></p>
-              <div class="slider-container">
-                <input type="range" min="1" max="100" name="shadowQuality" value="1" id="shadowQualitySlider" class="shadowQualitySlider"/>
-                <span id="shadowQualitySliderOutput">Low</span>
-              </div>
-
-              View distance
-              <p class="component-title"></p>
-              <div class="slider-container">
-                <input type="range" min="1" max="100" name="viewDistance" value="1" id="viewDistanceSlider" class="viewDistanceSlider"/>
-                <span id="viewDistanceSliderOutput">Low</span>
-              </div>
-            </div>
-        </div>
-          <button id="downloadButton" class="generate-ini-button" onclick="downloadFile()" style="display: none;">
-            Generate INI
-          </button>
-      </div>
-      <div class="iniFilePreview" id="iniFilePreviewId" style="display: none;">
-        <button class="copyTextButton" onclick="copyIniContent()"></button>
-        <textarea name="iniFilePreviewTextArea" id="iniFilePreviewTextAreaId" placeholder="Here you will see the ini file preview" cols="" rows=""></textarea>
-      </div>
-
-      <div class="pvpCommandPreview" id="pvpCommandPreviewId" style="display: none;">
-        <button class="copyTextButton" onclick="copyPvpCommand()"></button>
-        <textarea name="pvpCommandPreviewTextArea" id="pvpCommandPreviewTextAreaId" placeholder="Your PVP command to copy" cols="" rows=""></textarea>
-      </div>
-
-    </div>
-    <div class="main-footer theme-light">
-        <div class="contact-us">
-            <ul>
-                <li>Contact us</li>
-                <li><a href="https://discord.com/invite/RQ2NB2V9av">Discord Support server</a></li>
-                <li><a href="https://github.com/NNKTV28">Github</a></li>
+            <ul class="sidebar-nav">
+                <li>
+                    <button id="informationButton" class="sidebar-button selected" onclick="showSection('informationSection', this)">
+                        <iconify-icon icon="line-md:alert-circle"></iconify-icon>
+                        Information
+                    </button>
+                </li>
+                <li>
+                    <button id="modifyIniButton" class="sidebar-button" onclick="showSection('modifyIniSection', this)">
+                        <iconify-icon icon="line-md:edit"></iconify-icon>
+                        Modify .ini
+                    </button>
+                </li>
+                <li>
+                    <button id="modifySettingsButton" class="sidebar-button" onclick="showSection('modifySettingsSection', this)">
+                        <iconify-icon icon="line-md:cog"></iconify-icon>
+                        Modify Settings
+                    </button>
+                </li>
+                <li>
+                    <button id="mapPingsButton" class="sidebar-button" onclick="showSection('mapPingsSection', this)">
+                        <iconify-icon icon="line-md:map-marker"></iconify-icon>
+                        Map Pings
+                    </button>
+                </li>
+                <li>
+                    <button id="pvpSettingsButton" class="sidebar-button" onclick="showSection('pvpSettingsSection', this)">
+                        <iconify-icon icon="line-md:swords"></iconify-icon>
+                        PVP Settings
+                    </button>
+                </li>
+                <li>
+                    <button id="visualSettingsButton" class="sidebar-button" onclick="showSection('visualSettingsSection', this)">
+                        <iconify-icon icon="line-md:image"></iconify-icon>
+                        Visual Settings
+                    </button>
+                </li>
             </ul>
-        </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="main-wrapper">
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Ark Survival Ascended Configurator</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-toggle-button" title="Toggle Theme">
+                        <iconify-icon icon="line-md:sunny-outline-to-moon-loop-transition"></iconify-icon>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Upload Section -->
+                <div class="section-card" id="uploadAndDownloadButtons" style="display: none;">
+                    <h3>Upload Configuration</h3>
+                    <p style="margin-bottom: 15px; color: var(--sidebar-text);">Upload your existing GameUserSettings.ini to modify it.</p>
+                    <div class="file-upload-wrapper">
+                        <label for="gameUsersettingsFileInput" class="file-upload-label" id="customFileLabel">
+                            <iconify-icon icon="line-md:cloud-upload-loop" style="margin-right: 8px;"></iconify-icon>
+                            Upload .ini File
+                        </label>
+                        <input type="file" accept=".ini" id="gameUsersettingsFileInput" onchange="displayFileName()" />
+                    </div>
+                </div>
+
+                <!-- Information Section -->
+                <div id="informationSection" class="section-card" style="display: block;">
+                    <h2>Welcome</h2>
+                    <p style="margin-bottom: 20px;">This tool helps you generate or modify your Ark Survival Ascended GameUserSettings.ini file.</p>
+                    
+                    <h3>FAQ</h3>
+                    <div class="faq-item">
+                        <div class="faq-question">What is a GameUserSettings.ini file?</div>
+                        <div class="faq-answer">The GameUserSettings.ini file contains options for both the game client and the game server, allowing you to customize graphics, gameplay, and performance settings.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Where is the file located?</div>
+                        <div class="faq-answer">Typically found in: <code>SteamLibrary\steamapps\common\ARK Survival Ascended\ShooterGame\Saved\Config\Windows\GameUserSettings.ini</code></div>
+                    </div>
+                </div>
+
+                <!-- Modify INI Section -->
+                <div id="modifyIniSection" class="section-card" style="display: none;">
+                    <h2>Modify .ini</h2>
+                    <p>Content for modifying .ini will appear here.</p>
+                </div>
+
+                <!-- Modify Settings Section -->
+                <div id="modifySettingsSection" class="section-card" style="display: none;">
+                    <h2>Modify Settings</h2>
+                    <p>Content for modifying settings will appear here.</p>
+                </div>
+
+                <!-- Map Pings Section -->
+                <div id="mapPingsSection" class="section-card" style="display: none;">
+                    <h2>Map Pings</h2>
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="resourcePings" value="resourcePings"/>
+                            Resource Pings
+                        </label>
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="cavePings" value="cavePings"/>
+                            Cave Pings
+                        </label>
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="notePings" id="notePings" value="notePings"/>
+                            Note Pings
+                        </label>
+                    </div>
+                </div>
+
+                <!-- PVP Settings Section -->
+                <div id="pvpSettingsSection" class="section-card" style="display: none;">
+                    <h2>PVP Settings</h2>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="disableGrass" id="pvpGrassSwitch" onchange="togglePvpSetting(this)"/>
+                            Disable Grass
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="drawGrass" id="pvpTreesSwitch" onchange="togglePvpSetting(this)"/>
+                            Disable Trees
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="showTrees" id="pvpDisableFogSwitch" onchange="togglePvpSetting(this)"/>
+                            Disable Fog
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="toggleVolumetricClouds" id="pvpVolumetricCloudsSwitch" onchange="togglePvpSetting(this)"/>
+                            Disable Volumetric Clouds
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="toggleVolumetricClouds" id="pvpLumenReflections" onchange="togglePvpSetting(this)"/>
+                            Disable Lumen Reflections
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Visual Settings Section -->
+                <div id="visualSettingsSection" class="section-card" style="display: none;">
+                    <h2>Visual Settings</h2>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="autoBrightness" id="brightnessSwitch"/>
+                            Auto Brightness
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="drawGrass" value="drawGrass" id="grassSwitch"/>
+                            Draw Grass
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="showTrees" value="showTrees" id="treesSwitch"/>
+                            Show Trees
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" name="toggleVolumetricClouds" value="toggleVolumetricClouds" id="volumetricCloudsSwitch"/>
+                            Volumetric Clouds
+                        </label>
+                    </div>
+
+                    <div class="form-group slider-container">
+                        <div class="slider-label">
+                            <span>Shadow Quality</span>
+                            <span id="shadowQualitySliderOutput">Low</span>
+                        </div>
+                        <input type="range" min="1" max="100" name="shadowQuality" value="1" id="shadowQualitySlider" class="shadowQualitySlider"/>
+                    </div>
+
+                    <div class="form-group slider-container">
+                        <div class="slider-label">
+                            <span>View Distance</span>
+                            <span id="viewDistanceSliderOutput">Low</span>
+                        </div>
+                        <input type="range" min="1" max="100" name="viewDistance" value="1" id="viewDistanceSlider" class="viewDistanceSlider"/>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="margin-top: 20px;">
+                    <button id="downloadButton" class="btn btn-primary" onclick="downloadFile()" style="display: none;">
+                        <iconify-icon icon="line-md:download-loop"></iconify-icon>
+                        Generate INI
+                    </button>
+                </div>
+
+                <!-- Hidden Previews (kept for JS compatibility) -->
+                <div class="iniFilePreview" id="iniFilePreviewId" style="display: none;">
+                    <textarea name="iniFilePreviewTextArea" id="iniFilePreviewTextAreaId"></textarea>
+                </div>
+                <div class="pvpCommandPreview" id="pvpCommandPreviewId" style="display: none;">
+                    <textarea name="pvpCommandPreviewTextArea" id="pvpCommandPreviewTextAreaId"></textarea>
+                </div>
+
+            </div>
+        </main>
     </div>
+
     <script src="./JS/index.js"></script>
     <script src="./JS/downloadFile.js"></script>
     <script src="./JS/sectionFunctions.js"></script>
     <script src="./JS/theme.js"></script>
     <script src="./JS/pvpCommandSection.js"></script>
-  </body>
+</body>
 </html>

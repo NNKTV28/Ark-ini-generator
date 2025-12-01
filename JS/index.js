@@ -6,19 +6,19 @@ const FILE_TYPE = "text/plain";
 const FILENAME = "GameUserSettings.ini";
 
 // Ini file input (label)
-const iniFile = document.getElementById('gameUsersettingsFileInput');
+var iniFile = document.getElementById('gameUsersettingsFileInput');
 // Defined sections
-const sections = ['informationSection', 'modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
+var sections = ['informationSection', 'modifyIniSection', 'modifySettingsSection', 'mapPingsSection', 'pvpSettingsSection', 'visualSettingsSection'];
 // Upload file button
-const uploadFileButton = document.getElementById('uploadAndDownloadButtons');
+var uploadFileButton = document.getElementById('uploadAndDownloadButtons');
 // Download file button
-const downloadDileButton = document.getElementById('downloadButton');
+var downloadDileButton = document.getElementById('downloadButton');
 // Ini file content text area
-const iniContent = document.getElementById("iniFilePreviewTextAreaId");
+var iniContent = document.getElementById("iniFilePreviewTextAreaId");
 // Main wrapper
-const mainWrapper = document.getElementById("main-wrapper");
+var mainWrapper = document.getElementById("main-wrapper");
 // PVP command text area
-let pvpCommandText = document.getElementById("pvpCommandPreviewTextAreaId")
+var pvpCommandText = document.getElementById("pvpCommandPreviewTextAreaId")
 
 
 let renderedSection = "";
@@ -71,9 +71,6 @@ shadowQualitySlider.oninput = function() {
   }
 }
 
-<<<<<<< Updated upstream
-
-=======
 async function generateIniFile() {
   const gameUserSettingsField = document.getElementById("gameUsersettingsFileInput");
   
@@ -151,7 +148,6 @@ function toggleTheme() {
   //document.body.classList.toggle("darkmode");
   //document.getElementById("theme-toggle-button").checked = !document.getElementById("theme-toggle-button").checked;
 }
->>>>>>> Stashed changes
 
 // Display the selected file name in the custom file label
 function displayFileName() {
@@ -184,41 +180,8 @@ async function loadFileAsText() {
   }
 }
 
-<<<<<<< Updated upstream
-=======
 // Show only the selected section
-function showSection(sectionId, buttonId) {
-  // Hide all sections
-  sections.forEach(section => {
-      document.getElementById(section).style.display = 'none';
-  });  
-
-  // Remove 'selected' class from all buttons
-  const buttons = document.querySelectorAll('.sidebar-button');
-  buttons.forEach(btn => {
-      btn.classList.remove('selected');
-  });
-
-  // Show the selected section
-  document.getElementById(sectionId).style.display = 'block';
-
-  // Add 'selected' class to the clicked button
-  if(buttonId == null){
-    alert("Button id is null")
-  }else
-  {
-    document.getElementById(buttonId.id).classList.add('selected');
-    renderedSection = sectionId;
-    
-    if(renderedSection == 'informationSection' || renderedSection == 'pvpSettingsSection'){
-      uploadFileButton.style.display = 'none';
-      downloadDileButton.style.display = 'none';
-    }else{
-      uploadFileButton.style.display = 'block';
-      downloadDileButton.style.display = 'block';
-    }
-  } 
-}
+// function showSection(sectionId, buttonId) { ... } // Moved to sectionFunctions.js
 
 function modifyIniSection(){
 }
@@ -265,7 +228,6 @@ function visualSettingsSection(){
     }
   }
 }
->>>>>>> Stashed changes
 function showIniContent(){
   if(renderedSection != 'informationSection' && renderedSection!='pvpSettingsSection'){
     iniContent.value = gameUserSettingsIni;  
